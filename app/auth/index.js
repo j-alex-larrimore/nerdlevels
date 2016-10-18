@@ -3,7 +3,7 @@ const passport = require('passport');
 const config = require('../config');
 const logger = require('../logger');
 const h = require('../helpers');
-const FacebookStrategy = require('passport-facebook').Strategy;
+//const FacebookStrategy = require('passport-facebook').Strategy;
 //const TwitterStrategy = require('passport-twitter').Strategy;
 
 module.exports = () => {
@@ -38,6 +38,6 @@ module.exports = () => {
         //if user is not found, create one locally and return
     }
     
-    passport.use(new FacebookStrategy(config.fb, authProcessor));
+   // passport.use(new FacebookStrategy(config.fb, authProcessor));
    // passport.use(new TwitterStrategy(config.twitter, authProcessor));
 }
