@@ -4,7 +4,7 @@ const redis = require('redis').createClient;
 const adapter = require('socket.io-redis');
 
 //social authentication
-//require('./auth')();
+require('./auth')();
 
 //Create an IO Server instance
 let ioServer = app => {
