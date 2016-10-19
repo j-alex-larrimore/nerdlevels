@@ -16,8 +16,8 @@ if(process.env.NODE_ENV === 'production'){
             profileFields: ['id', 'displayName', 'photos']
         },
         twitter: {
-            clientID: process.env.twClientID,
-            clientSecret: process.env.twClientSecret,
+            consumerKey: process.env.twClientID,
+            consumerSecret: process.env.twClientSecret,
             callbackURL: process.env.host + "/auth/twitter/callback",
             profileFields: ['id', 'displayName', 'photos']
         },
