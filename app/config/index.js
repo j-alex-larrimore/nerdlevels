@@ -21,7 +21,7 @@ if(process.env.NODE_ENV === 'production'){
             callbackURL: process.env.host + "/auth/twitter/callback",
             profileFields: ['id', 'displayName', 'photos']
         },
-        redist: {
+        redis: {
             host: redisURI.hostname,
             port: redisURI.port,
             password: redisPassword
