@@ -32,5 +32,5 @@ app.use('/', nerdLevels.router);
 
 //instead of app.listen we replaceapp with chatCat.ioServer
 nerdLevels.ioServer(app).listen(app.get('port'), () =>{
-    console.log('ChatCAT running on port: ', app.get('port'));
+    console.log('NerdLevels running on port: ', app.get('port'));
 });

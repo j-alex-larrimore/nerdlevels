@@ -16,6 +16,12 @@ module.exports = () =>{
                     host: config.host
                 });
             }],
+            '/index':[h.isAuthenticated, (req, res, next)=>{
+                res.render('index', {
+                    user: req.user,
+                    host: config.host
+                });
+            }],
             //Using /:id allows us to extract the id and store it in id keyword
             '/chat/:id':[h.isAuthenticated, (req, res, next)=>{
                 //Find a chatroom with given id. We can access stuff like :id by using req.params
@@ -35,17 +41,17 @@ module.exports = () =>{
             }],
             '/auth/facebook': passport.authenticate('facebook'),
             '/auth/facebook/callback': passport.authenticate('facebook', {
-                successRedirect: '/rooms',
+                successRedirect: '/index',
                 failureRedirect: '/'
             }),
             '/auth/twitter': passport.authenticate('twitter'),
             '/auth/twitter/callback': passport.authenticate('twitter', {
-                successRedirect: '/rooms',
+                successRedirect: '/index',
                 failureRedirect: '/'
             }),
             '/auth/google': passport.authenticate('google'),
             '/auth/google/callback': passport.authenticate('google', {
-                successRedirect: '/rooms',
+                successRedirect: '/index',
                 failureRedirect: '/'
             }),
             '/logout':(req, res, next)=>{
