@@ -5,6 +5,7 @@ const logger = require('../logger');
 const h = require('../helpers');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 module.exports = () => {
     //invoked by passport when authorized process ends. Creates a session. 
@@ -40,4 +41,5 @@ module.exports = () => {
     
     passport.use(new FacebookStrategy(config.fb, authProcessor));
     passport.use(new TwitterStrategy(config.twitter, authProcessor));
+    passport.use(new GoogleStrategy(config.google, authProcessor));
 }

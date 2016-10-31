@@ -43,6 +43,11 @@ module.exports = () =>{
                 successRedirect: '/rooms',
                 failureRedirect: '/'
             }),
+            '/auth/google': passport.authenticate('google'),
+            '/auth/google/callback': passport.authenticate('google', {
+                successRedirect: '/rooms',
+                failureRedirect: '/'
+            }),
             '/logout':(req, res, next)=>{
                 req.logout();
                 res.redirect('/');

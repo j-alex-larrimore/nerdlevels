@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const app = express();
-const chatCat = require('./app');
+const nerdLevels = require('./app');
 const passport = require('passport');
 
 app.set('port', process.env.PORT || 3000);
@@ -13,7 +13,7 @@ app.use(express.static('public'));
 //automatically module imported and set 
 app.set('view engine', 'ejs');
 
-app.use('/', chatCat.session);
+app.use('/', nerdLevels.session);
 //hooks passport up to express, connects to request and response streams
 app.use(passport.initialize());
 //hooks express session middleware to passport (serialize & deserializeuser functions)
@@ -23,14 +23,14 @@ app.use(require('morgan')('combined', {
     stream: {
         write: message=>{
             //write to logs with Winston
-            chatCat.logger.log('info', message);
+            nerdLevels.logger.log('info', message);
         }
     }
 }));
 
-app.use('/', chatCat.router);
+app.use('/', nerdLevels.router);
 
 //instead of app.listen we replaceapp with chatCat.ioServer
-chatCat.ioServer(app).listen(app.get('port'), () =>{
+nerdLevels.ioServer(app).listen(app.get('port'), () =>{
     console.log('ChatCAT running on port: ', app.get('port'));
 });
