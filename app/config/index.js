@@ -25,7 +25,8 @@ if(process.env.NODE_ENV === 'production'){
             clientID: process.env.ggClientID,
             clientSecret: process.env.ggClientSecret,
             callbackURL: process.env.host + "/auth/google/callback",
-            profileFields: ['id', 'displayName', 'photos']
+            profileFields: ['id', 'displayName', 'photos'],
+            scope: ['email', 'profile']
         },
         redis: {
             host: redisURI.hostname,
