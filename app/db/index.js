@@ -8,25 +8,40 @@ Mongoose.connection.on('error', error =>{
     logger.log('error', 'Mongoose db connection error: ' + error);
 });
 
+var now = Date.now();
+
 //Create schema for storing user data
 const chatUser = new Mongoose.Schema({
     profileId: String,
     fullName: String,
-    profilePic: String
+    profilePic: String,
+    watchedVideos:[String],
+    subscription: {type: Boolean, default: false},
+    subscriptionEnd: {type: Date, default: now }
 });
 
 //turn schema into usable model
 let userModel = Mongoose.model('chatUser', chatUser);
 
+var videoList = new Mongoose.Schema({
+        project:String,
+        component:String,
+        name:String,
+        number:Number
+    })
+    
+let singleVideoModel = Mongoose.model('videoList', videoList);
+
 //First try and making knox work in this project?
 var knoxClient = knox.createClient({
-    key: config.S3AccessKey,
-    secret: config.S3Secret,
+    key: config.AWS_ACCESS_KEY_ID,
+    secret: config.AWS_SECRET_ACCESS_KEY,
     bucket: config.S3Bucket
 })
 
 module.exports = {
     Mongoose, 
     userModel,
+    singleVideoModel,
     knoxClient
 }

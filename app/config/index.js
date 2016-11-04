@@ -7,8 +7,12 @@ if(process.env.NODE_ENV === 'production'){
     
     module.exports = {
         host: process.env.host || "",
+        url: process.env.siteURL,
         dbURI: process.env.dbURI,
         sessionSecret: process.env.sessionSecret,
+        S3Bucket: process.env.S3Bucket,
+        AWS_SECRET_ACCESS_KEY: process.env.S3Secret,
+        AWS_ACCESS_KEY_ID: process.env.S3AccessKey,
         fb: {
             clientID: process.env.fbClientID,
             clientSecret: process.env.fbClientSecret,

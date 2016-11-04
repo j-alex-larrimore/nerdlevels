@@ -23,7 +23,7 @@ app.use(require('morgan')('combined', {
     stream: {
         write: message=>{
             //write to logs with Winston
-            nerdLevels.logger.log('info', message);
+            //////nerdLevels.logger.log('info', message);
         }
     }
 }));

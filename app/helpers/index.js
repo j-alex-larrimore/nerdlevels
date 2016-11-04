@@ -148,6 +148,69 @@ const crypto = require('crypto');
      }
  }
  
+ let getVideo = (req, res) =>{
+     db.knoxClient.getFile(req, function(err, videoStream){
+         if(err){
+             console.log(err);
+         }else{
+             //var readableStream = fs.createReadStream(h.getVideo('https://s3.amazonaws.com/nerdlevels/'+ pject +'/' + cmpnt +'/' + vName));
+                        /*videoStream.on('data', function(chunk){
+                           data+=chunk; 
+                        });*/
+                        
+                        videoStream.on('end', function(){
+                           console.log("Video read end!"); 
+                        });
+         }
+         return null;
+     });
+     //return db.knoxClient.get(req);
+     
+     //return 
+ }
+ 
+  function contains(a, obj) {
+    var i = a.length;
+    while (i--) {
+        console.log(a[i] + " " + obj);
+       if (a[i] === obj) {
+           return true;
+       }
+    }
+    return false;
+}
+ 
+ let watchedVideo = (req, res) => {
+     //Find user in DB
+     //Check current watched videos to see if this is already there
+     //Add video to watchedvideos
+     db.userModel.findOne({'_id': req.user}, function(err, result){
+         if(err != null){
+             console.log(err);
+         }else{
+             if(result.watchedVideos != null && !contains(result.watchedVideos, req.video)){
+                result.update({$push: {"watchedVideos": req.video}}, function(err, result){
+                    if(err != null){
+                         console.log(err);
+                    }else{
+                        console.log("Watched video Added!");
+                    }
+                });
+            }else{
+                 
+             }
+         }
+             
+         
+     });
+ }
+ 
+
+ 
+ let unwatchVideo = (req, res) => {
+     
+ }
+ 
  module.exports = {
      route,
      findOne,
@@ -158,5 +221,8 @@ const crypto = require('crypto');
      findRoomByName,
      findRoomById,
      addUserToRoom,
-     removeUserFromRoom
+     removeUserFromRoom,
+     getVideo,
+     watchedVideo,
+     unwatchVideo
  }

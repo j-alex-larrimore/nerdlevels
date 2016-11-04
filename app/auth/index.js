@@ -28,6 +28,7 @@ module.exports = () => {
                if(result){
                    done(null, result);
                }else{
+                   console.log("Creating a new user");
                    //create new user and return
                    h.createNewUser(profile)
                         .then(newChatUser => done(null, newChatUser))
