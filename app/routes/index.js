@@ -4,12 +4,13 @@ const passport = require('passport');
 const config = require('../config');
 const db = require('../db');
 const fs = require('fs');
+var nodemailer = require('nodemailer');
 
 module.exports = () =>{
     let routes = {
         'get': {
             '/': (req, res, next)=> {
-                res.render('login');
+                res.render('landing');
             },
             //Can turn this route into an array so it runs isAuthenticated first
             '/rooms':[h.isAuthenticated, (req, res, next)=>{
@@ -149,7 +150,39 @@ module.exports = () =>{
             }]
         },
         'post':{
-            
+            '/mail/contact_me.php' : (req, res, next) =>{
+                
+                // create reusable transporter object using the default SMTP transport
+                var transporter = nodemailer.createTransport("SMTP",{
+                    host: "smtp.gmail.com",
+                    secureConnection: false,
+                    port: 587,
+                    requiresAuth: true,
+                    domains: ["gmail.com", "googlemail.com"],
+                    auth: {
+                    user: config.emailAddress,
+                    pass: config.emailPwd
+                    }
+                });
+                
+                
+                // setup e-mail data with unicode symbols
+                var mailOptions = {
+                    from: req.body.email, // sender address
+                    to: 'nerdlevels@nerdlevels.com', // list of receivers
+                    subject: 'From: ' + req.body.email, // Subject line
+                    text: req.body.message, // plaintext body
+                    html: req.body.message // html body
+                };
+
+                // send mail with defined transport object
+                transporter.sendMail(mailOptions, function(error, info){
+                    if(error){
+                        return console.log(error);
+                    }
+                    console.log('Message sent');
+                });
+            }
         },
         'NA': (req, res, next) =>{
             //Should be processing from server.js

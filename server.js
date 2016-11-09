@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 const nerdLevels = require('./app');
 const passport = require('passport');
 
@@ -28,7 +29,25 @@ app.use(require('morgan')('combined', {
     }
 }));
 
+/*var unless = function(path, middleware) {
+    return function(req, res, next) {
+        if (path === req.path) {
+            console.log("UNLESS php");
+            
+            return next();
+        } else {
+            return middleware(req, res, next);
+        }
+    };
+};*/
+
+//Need to use these methods with body parser
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 app.use('/', nerdLevels.router);
+//app.use(unless('/mail/contact_me.php', nerdLevels.router));
+
 
 //instead of app.listen we replaceapp with chatCat.ioServer
 nerdLevels.ioServer(app).listen(app.get('port'), () =>{

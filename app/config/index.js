@@ -8,6 +8,8 @@ if(process.env.NODE_ENV === 'production'){
     module.exports = {
         host: process.env.host || "",
         url: process.env.siteURL,
+        emailAddress: process.env.emailAddress,
+        emailPwd: process.env.emailPwd,
         dbURI: process.env.dbURI,
         sessionSecret: process.env.sessionSecret,
         S3Bucket: process.env.S3Bucket,
