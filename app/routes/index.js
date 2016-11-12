@@ -14,7 +14,6 @@ module.exports = () =>{
             },
             //Can turn this route into an array so it runs isAuthenticated first
             '/rooms':[h.isAuthenticated, (req, res, next)=>{
-                console.log(req.user);
                 res.render('rooms', {
                     user: req.user,
                     host: config.host
@@ -26,7 +25,6 @@ module.exports = () =>{
                 });
             },
             '/index':[h.isAuthenticated, (req, res, next)=>{
-                console.log(req.user);
                 var vName,
                     vNumber, 
                     pject, 
@@ -119,7 +117,6 @@ module.exports = () =>{
                 res.send("session set");
             },
             '/getvideo/:id':[h.isAuthenticated, (req, res, next)=>{
-                console.log(req.params.id);
                 db.singleVideoModel.findOne({'name': req.params.id}, function(err, result){
                     if(err != null){
                         console.log(err);

@@ -48,7 +48,7 @@ h6 {
 
 .intro-message > h1 {
     font-family: 'Audiowide', cursive;
-    /*color: #39FF14;*/
+    color: #39FF14;
     /*font-family: 'Press Start 2P', cursive;*/
     margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
@@ -66,7 +66,7 @@ h6 {
     /*color: #39FF14;*/
     font-family: 'Audiowide', cursive;
     /*font-family: 'Press Start 2P', cursive;*/
-    font-size: 3em;
+    font-size: 2em;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
 }
 

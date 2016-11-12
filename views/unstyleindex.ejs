@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>NerdLevels</title>
+    <link rel="icon" type="image/png" href="img/nerdlevels-logo.png" />
+    
+    <!--video.js-->
+    <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
+    <script src="http://vjs.zencdn.net/c/video.js"></script>
+    
+	<script src="/js/jquery-2.1.4.min.js"></script>
+    <script>
+    'use strict';
+    $(() => {
+         
+        var host = "localhost.3000";
+        //var host = '{{host}}';
+        
+        function playVideo(){
+            var str = `<video id="video1" class="video-js vjs-default-skin" width="640" height="480" data-setup='{"controls" : true, "autoplay" : true, "preload" : "auto"}'>`;
+            str+= '<source src=https://s3.amazonaws.com/nerdlevels/<%= project%>/<%= component %>/<%= vidName %> type="video/x-flv">';          
+
+            $('.videosDiv').append(str);  
+        }
+       
+        playVideo();
+        
+    });
+    </script>
+</head>
+<body>
+	<div class="container">
+		<div class="titlePanel">
+			<h1>NerdLevels</h1>
+		</div>
+        <div class="VideoNav">
+            <ol>
+                <li><a id="Google+Fonts.flv" href="/getvideo/Google+Fonts.flv">Video A</a></li>
+                <li><a id="Adding+a+Story.flv" href="/getvideo/Adding+a+Story.flv">Video B</a></li>
+                <li><a a id="Prefabs+for+Level+Building.flv" href="/getvideo/Prefabs+for+Level+Building.flv">Video C</a></li>
+            </ol>
+        </div>
+        <div class="userinfo">
+            <ul>
+                <li>User: <%= user.fullName %></li>
+                <li>Subscription? <%= user.subscription %></li>
+                <li>Videos Seen: <%= user.watchedVideos %></li>
+            </ul>
+        </div>
+        <div class="videosDiv"></div>
+	</div>
+</body>
+</html>

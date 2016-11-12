@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-	<meta charset="UTF-8">
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>NerdLevels</title>
-    <link rel="icon" type="image/png" href="img/nerdlevels-logo.png" />
-	<link rel="stylesheet" href="/css/chatroomStyles.css">
-    <!--video.js-->
+    <link rel="icon" type="image/png" href="/img/nerdlevels-logo-green.png" />
+	<!--<link rel="stylesheet" href="assets/demo.css">-->
+	<link rel="stylesheet" href="/css/sidebar-collapse.css">
+    <link rel="stylesheet" href="/css/header-basic.css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+
+     <!--video.js-->
     <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
     <script src="http://vjs.zencdn.net/c/video.js"></script>
     
 	<script src="/js/jquery-2.1.4.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/utils.js"></script>
-    <script src="https://widget.cloudinary.com/global/all.js"></script>
     <script>
     'use strict';
     $(() => {
@@ -27,17 +37,170 @@
             $('.videosDiv').append(str);  
         }
        
-        playVideo();
+        //playVideo();
         
     });
     </script>
+    
+
 </head>
+
 <body>
-	<div class="container">
-		<div class="titlePanel">
-			<h1>NerdLevels</h1>
-		</div>
-        <div class="VideoNav">
+    <header class="header-basic">
+
+			<div class="header-limiter">
+                <h1>NerdLevels</h1>
+				<nav>
+					<a href="#" class="selected">Learn</a>
+                    <a href="#">Examples</a>
+                    <a href="#">Blog</a>
+					<a href="#">About</a>
+					<a href="#">Faq</a>
+				</nav>
+			</div>
+
+		</header>
+
+
+	<aside class="sidebar-left-collapse">
+
+		<a href="#" class="company-logo"><img id="logo" src="/img/nerdlevels-logo-green.png" alt="NerdLevels"></a>
+        <div class="sidebar-links">
+		<div class="link">
+            <div class="clickable link-blue selected">
+				<a href="#">
+					<i class="fa fa-desktop"></i>Web Development
+				</a>
+            </div>
+				<div class="sub-links">
+                    <div class="clickable">
+                        <a href="#">Resume </a>
+                    </div>
+                    <div class= "sub-sub-links">
+                        <div class="clickable">
+                            <a href="#">Component 1 </a>
+                        </div>
+                        <ul class="sub-sub-sub-links">
+                            <li><div class="video"><a href="#">Vid 1</a></div></li>
+                            <li><div class="video"><a href="#">Vid 2</a></div></li>
+                            <li><div class="video"><a href="#">Vid 3</a></div></li>
+                            <li><div class="video"><a href="#">Vid 4</a></div></li>
+                        </ul> 
+                    </div>
+                    <div class= "sub-sub-links">
+                        <div class="clickable">
+                            <a href="#">Component 2 </a>
+                        </div>
+                        <ul class="sub-sub-sub-links">
+                            <li><div class="video"><a href="#">Vid 1</a></div></li>
+                            <li><div class="video"><a href="#">Vid 2</a></div></li>
+                            <li><div class="video"><a href="#">Vid 3</a></div></li>
+                            <li><div class="video"><a href="#">Vid 4</a></div></li>
+                        </ul>
+                    </div>    
+                </div>
+                            
+                <div class="sub-links">
+                    <div class="clickable">
+                        <a href="#">Portfolio</a>
+                    </div>
+                    <div class= "sub-sub-links">
+                        <div class="clickable">
+                            <a href="#">Component 1 </a>
+                        </div>
+                        <ul class="sub-sub-sub-links">
+                            <li><div class="video"><a href="#">Vid 1</a></div></li>
+                            <li><div class="video"><a href="#">Vid 2</a></div></li>
+                            <li><div class="video"><a href="#">Vid 3</a></div></li>
+                            <li><div class="video"><a href="#">Vid 4</a></div></li>
+                        </ul> 
+                    </div>
+                    <div class= "sub-sub-links">
+                        <div class="clickable">
+                            <a href="#">Component 2 </a>
+                        </div>
+                        <ul class="sub-sub-sub-links">
+                            <li><div class="video"><a href="#">Vid 1</a></div></li>
+                            <li><div class="video"><a href="#">Vid 2</a></div></li>
+                            <li><div class="video"><a href="#">Vid 3</a></div></li>
+                            <li><div class="video"><a href="#">Vid 4</a></div></li>
+                        </ul>
+                    </div>    
+                </div>
+        </div>
+        <div class="link">
+            <div class="clickable link-red">
+                    <a href="#">
+                        <i class="fa fa-gamepad"></i>Game Development
+                    </a>
+            </div>
+		    <div class="sub-links">
+                    <div class="clickable">
+                        <a href="#">Platformer </a>
+                    </div>
+                    <div class= "sub-sub-links">
+                        <div class="clickable">
+                            <a href="#">Component 1 </a>
+                        </div>
+                        <ul class="sub-sub-sub-links">
+                            <li><div class="video"><a href="#">Vid 1</a></div></li>
+                            <li><div class="video"><a href="#">Vid 2</a></div></li>
+                            <li><div class="video"><a href="#">Vid 3</a></div></li>
+                            <li><div class="video"><a href="#">Vid 4</a></div></li>
+                        </ul> 
+                    </div>
+                    <div class= "sub-sub-links">
+                        <div class="clickable">
+                            <a href="#">Component 2 </a>
+                        </div>
+                        <ul class="sub-sub-sub-links">
+                            <li><div class="video"><a href="#">Vid 1</a></div></li>
+                            <li><div class="video"><a href="#">Vid 2</a></div></li>
+                            <li><div class="video"><a href="#">Vid 3</a></div></li>
+                            <li><div class="video"><a href="#">Vid 4</a></div></li>
+                        </ul>
+                    </div>    
+            </div>
+                            
+            <div class="sub-links">
+                    <div class="clickable">
+                        <a href="#">Metroidvania </a>
+                    </div>
+                    <div class= "sub-sub-links">
+                        <div class="clickable">
+                            <a href="#">Component 1 </a>
+                        </div>
+                        <ul class="sub-sub-sub-links">
+                            <li><div class="video"><a href="#">Vid 1</a></div></li>
+                            <li><div class="video"><a href="#">Vid 2</a></div></li>
+                            <li><div class="video"><a href="#">Vid 3</a></div></li>
+                            <li><div class="video"><a href="#">Vid 4</a></div></li>
+                        </ul> 
+                    </div>
+                    <div class= "sub-sub-links">
+                        <div class="clickable">
+                            <a href="#">Component 2 </a>
+                        </div>
+                        <ul class="sub-sub-sub-links">
+                            <li><div class="video"><a href="#">Vid 1</a></div></li>
+                            <li><div class="video"><a href="#">Vid 2</a></div></li>
+                            <li><div class="video"><a href="#">Vid 3</a></div></li>
+                            <li><div class="video"><a href="#">Vid 4</a></div></li>
+                        </ul>
+                    </div>    
+                </div>
+        </div>
+        </div>
+	</aside>
+
+    
+    
+	<div class="main-content">
+        <h1 id="videoTitle"></h1>
+        <!--<div class="titlePanel">
+			<h1 id="videoTitle">?</h1>
+		</div>-->
+        <!--<div class="VideoNav">
             <ol>
                 <li><a id="Google+Fonts.flv" href="/getvideo/Google+Fonts.flv">Video A</a></li>
                 <li><a id="Adding+a+Story.flv" href="/getvideo/Adding+a+Story.flv">Video B</a></li>
@@ -50,8 +213,73 @@
                 <li>Subscription? <%= user.subscription %></li>
                 <li>Videos Seen: <%= user.watchedVideos %></li>
             </ul>
-        </div>
+        </div>-->
         <div class="videosDiv"></div>
+		
+
 	</div>
+    			
+
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script>
+
+        $(function () {
+			var links = $('.sidebar-links > div > .clickable ~ div > .clickable ~ div > .clickable');
+
+			links.on('click', function () {
+                if($(this).hasClass("selected")){
+                    links.removeClass('selected');
+                }else{
+                    links.removeClass('selected');
+                    $(this).addClass('selected');
+                }
+			});  
+          });  
+            
+		$(function () {
+            //, .sublinks, .sub-sub-links, 
+			var links = $('.sidebar-links > div > .clickable ~ div > .clickable');
+
+			links.on('click', function () {
+                if($(this).hasClass("selected")){
+                    links.removeClass('selected');
+                }else{
+                    links.removeClass('selected');
+                    $(this).addClass('selected');
+                }
+
+			});    
+		});
+        
+        $(function () {
+			var links = $('.sidebar-links > div > .clickable');
+
+			links.on('click', function () {
+                if($(this).hasClass("selected")){
+                    links.removeClass('selected');
+                }else{
+                    links.removeClass('selected');
+                    $(this).addClass('selected');
+                }
+
+			});    
+		});
+
+        $(function () {
+			var links = $('.sidebar-links  div.video a');
+
+			links.on('click', function () {
+                 links.removeClass('active');
+                 $(this).addClass('active');
+                
+                var title = $('#videoTitle');
+                title.html($(this).html());
+			});    
+		});
+        
+	</script>
+
 </body>
+
 </html>
