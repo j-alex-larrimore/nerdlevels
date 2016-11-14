@@ -10,6 +10,8 @@
 	<title>NerdLevels</title>
     <link rel="icon" type="image/png" href="/img/nerdlevels-logo-green.png" />
 	<!--<link rel="stylesheet" href="assets/demo.css">-->
+    
+        
 	<link rel="stylesheet" href="/css/sidebar-collapse.css">
     <link rel="stylesheet" href="/css/header-basic.css">
     
@@ -21,6 +23,7 @@
      <!--video.js-->
     <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
     <script src="http://vjs.zencdn.net/c/video.js"></script>
+    <!--<script src="/js/videojs-contrib-hls.js"></script> -->
     
 	<script src="/js/jquery-2.1.4.min.js"></script>
     <script>
@@ -37,7 +40,7 @@
             $('.videosDiv').append(str);  
         }
        
-        //playVideo();
+        playVideo();
         
     });
     </script>
@@ -85,7 +88,7 @@
                             <li><div class="video"><a href="#">Vid 2</a></div></li>
                             <li><div class="video"><a href="#">Vid 3</a></div></li>
                             <li><div class="video"><a href="#">Vid 4</a></div></li>
-                        </ul> 
+                        </ul>  
                     </div>
                     <div class= "sub-sub-links">
                         <div class="clickable">
@@ -96,8 +99,8 @@
                             <li><div class="video"><a href="#">Vid 2</a></div></li>
                             <li><div class="video"><a href="#">Vid 3</a></div></li>
                             <li><div class="video"><a href="#">Vid 4</a></div></li>
-                        </ul>
-                    </div>    
+                        </ul> 
+                    </div>   
                 </div>
                             
                 <div class="sub-links">
@@ -113,7 +116,7 @@
                             <li><div class="video"><a href="#">Vid 2</a></div></li>
                             <li><div class="video"><a href="#">Vid 3</a></div></li>
                             <li><div class="video"><a href="#">Vid 4</a></div></li>
-                        </ul> 
+                        </ul>
                     </div>
                     <div class= "sub-sub-links">
                         <div class="clickable">
@@ -158,7 +161,7 @@
                             <li><div class="video"><a href="#">Vid 2</a></div></li>
                             <li><div class="video"><a href="#">Vid 3</a></div></li>
                             <li><div class="video"><a href="#">Vid 4</a></div></li>
-                        </ul>
+                        </ul> 
                     </div>    
             </div>
                             
@@ -186,7 +189,7 @@
                             <li><div class="video"><a href="#">Vid 2</a></div></li>
                             <li><div class="video"><a href="#">Vid 3</a></div></li>
                             <li><div class="video"><a href="#">Vid 4</a></div></li>
-                        </ul>
+                        </ul> 
                     </div>    
                 </div>
         </div>
@@ -270,13 +273,21 @@
 			var links = $('.sidebar-links  div.video a');
 
 			links.on('click', function () {
-                 links.removeClass('active');
+                var position= $(window).scrollTop();
+                console.log(position);
+                
+                links.removeClass('active');
                  $(this).addClass('active');
                 
                 var title = $('#videoTitle');
                 title.html($(this).html());
+
+                //$(document).scrollTop(position);
+                $("html,body").animate({ scrollTop: position }, "slow");
 			});    
 		});
+        
+        
         
 	</script>
 

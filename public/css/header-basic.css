@@ -67,28 +67,36 @@
 @media all and (max-width: 600px) {
 
 	.header-basic {
-		padding: 20px 0;
+		padding: 30px 0;
 		height: 75px;
 	}
+    
+    .header-basic .header-limiter{
+        margin: 0 0 -10px 0;
+        width: 100%;
+    }
 
 	.header-basic .header-limiter h1 {
-		float: none;
-		margin: -8px 0 10px;
-		text-align: center;
-		font-size: 24px;
+		float: left;
+		margin: 0 0 0 0; /*-8px 0 10px;*/
+		/*text-align: center*/
+		font-size: 15px;
 		line-height: 1;
 	}
 
 	.header-basic .header-limiter nav {
 		line-height: 1;
-		float:none;
+        float: none;
 	}
 
 	.header-basic .header-limiter nav a {
-		font-size: 13px;
+		font-size: 10px;
+        padding: 0 2px;
 	}
 
 }
+
+
 
 /* For the headers to look good, be sure to reset the margin and padding of the body */
 

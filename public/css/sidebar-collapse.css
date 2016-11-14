@@ -149,11 +149,21 @@ body{
 
 /* Making the sidebar responsive */
 
+#video1 {
+		padding: 20px 20px;
+        display: block;
+        margin: 0 auto;
+	}
+
 @media (max-width: 900px) {
 
+   #video1 {
+		position: static;
+	}
+    
 	.main-content{
 		max-width: none;
-		padding: 70px 20px;
+		padding: 10px 20px;
 		margin: 0 0 40px;
 	}
 
@@ -161,7 +171,7 @@ body{
 		width: auto;
 		height: auto;
 		position: static;
-		padding: 20px 0 0;
+		padding: 2px 0 0;
 	}
 
 	.sidebar-left-collapse .sidebar-links {
@@ -169,26 +179,33 @@ body{
 		margin: 20px auto 0;
 	}
 
-	.sidebar-links div {
+	.sidebar-links > div {
 		display: inline-block;
-		width: 100px;
+		/*width: 100px;*/
+        width: 45%;
 	}
 
-	.sidebar-links div > a {
+	.sidebar-links div > div.clickable {
 		text-align: center;
 		margin: 0;
-		padding: 10px 0;
+		padding: 1px 0;
 		border-left: none;
 		border-top-width: 2px;
 		border-top-style: solid;
-	}
-
-	.sidebar-links div > a i.fa {
-		display: block;
+        
+        display: block;
 		margin: 0 auto 5px;
 	}
 
-	.sidebar-links div ul.sub-links {
+	.sidebar-links div.clickable > a {
+	   padding: 2px 5px;	
+	}
+    
+    .sidebar-links div > a i.fa{
+       position: inherit;
+    }
+
+	/*.sidebar-links div ul.sub-links {
 		display: none;
 	}
 
@@ -210,17 +227,13 @@ body{
 		margin-right: 20px;
 		font-size: 13px;
 		color: #748290;
-	}
+	}*/
 
 }
 
 /* Smartphone version */
 
 @media (max-width: 450px) {
-
-	.main-content{
-		padding: 90px 20px;
-	}
 
 	.sidebar-left-collapse {
 		padding: 20px 0;
@@ -229,7 +242,7 @@ body{
 	.sidebar-left-collapse .sidebar-links {
 		text-align: center;
 		margin: 20px auto 0;
-		position: relative;
+		position: static;
 	}
 
 	.sidebar-links div {
@@ -240,11 +253,11 @@ body{
 
 	.sidebar-links div > a {
 		text-align: left;
-		padding: 10px 25px;
+		padding: 1px 10px;
 		vertical-align: middle;
-		border-top: none;
+		/*border-top: none;
 		border-left-width: 2px;
-		border-left-style: solid;
+		border-left-style: solid;*/
 	}
 
 	.sidebar-links div > a i.fa {
