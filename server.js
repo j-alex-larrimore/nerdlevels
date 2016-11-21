@@ -29,17 +29,6 @@ app.use(require('morgan')('combined', {
     }
 }));
 
-/*var unless = function(path, middleware) {
-    return function(req, res, next) {
-        if (path === req.path) {
-            console.log("UNLESS php");
-            
-            return next();
-        } else {
-            return middleware(req, res, next);
-        }
-    };
-};*/
 
 //Need to use these methods with body parser
 app.use(bodyParser.urlencoded({extended: true}));

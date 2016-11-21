@@ -21,26 +21,25 @@
 	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
 
      <!--video.js-->
-    <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
-    <script src="http://vjs.zencdn.net/c/video.js"></script>
-    <!--<script src="/js/videojs-contrib-hls.js"></script> -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.10.2/alt/video-js-cdn.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.10.2/video.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/3.0.2/videojs-contrib-hls.js"></script>
     
 	<script src="/js/jquery-2.1.4.min.js"></script>
     <script>
     'use strict';
-    $(() => {
-         
-        var host = "localhost.3000";
-        //var host = '{{host}}';
+    $(() => {        
         
+        //videojs classes class="video-js vjs-default-skin"
         function playVideo(){
-            var str = `<video id="video1" class="video-js vjs-default-skin" width="640" height="480" data-setup='{"controls" : true, "autoplay" : true, "preload" : "auto"}'>`;
-            str+= '<source src=https://s3.amazonaws.com/nerdlevels/<%= project%>/<%= component %>/<%= vidName %> type="video/x-flv">';          
-
-            $('.videosDiv').append(str);  
+            /*var str = `<video id="video1" class="video-js vjs-default-skin" width="640" height="480" data-setup='{"controls" : true, "autoplay" : true, "preload" : "auto"}'>`;
+            str+= '<source src=https://s3.amazonaws.com/nerdlevels/<%= project%>/<%= component %>/<%= vidName %> type="video/x-flv">';  */        
+            
+            //$('.videosDiv').append(str);  
         }
        
         playVideo();
+        
         
     });
     </script>
@@ -217,7 +216,11 @@
                 <li>Videos Seen: <%= user.watchedVideos %></li>
             </ul>
         </div>-->
-        <div class="videosDiv"></div>
+        <div class="videosDiv">
+           <video width="320" height="240" controls>
+            <source src="/img/test2.mp4" type="video/mp4">
+            </video>
+        </div>
 		
 
 	</div>
@@ -226,7 +229,9 @@
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script>
-
+        
+        //$('video,audio').mediaelementplayer(/* Options */);
+        
         $(function () {
 			var links = $('.sidebar-links > div > .clickable ~ div > .clickable ~ div > .clickable');
 

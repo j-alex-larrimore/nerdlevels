@@ -11,6 +11,7 @@ module.exports = () =>{
         'get': {
             '/': (req, res, next)=> {
                 res.render('landing');
+                //res.render('index');
             },
             //Can turn this route into an array so it runs isAuthenticated first
             '/rooms':[h.isAuthenticated, (req, res, next)=>{
