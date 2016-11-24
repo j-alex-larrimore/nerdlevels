@@ -1,35 +1,28 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
-import { MessageComponent } from "./messages/message.component";
-import { MessageListComponent } from "./messages/message-list.component";
-import { MessageInputComponent } from "./messages/message-input.component";
-import { MessagesComponent } from "./messages/messages.component";
-import { AuthenticationComponent } from "./auth/authentication.component";
-import { HeaderComponent } from "./header.component";
+import { MainComponent } from "./maincomponent/main-component";
+import { MenuComponent } from "./menucomponent/menu-component";
+import { IndexComponent } from "./index/index";
 import { routing } from "./app.routing";
-import { LogoutComponent } from "./auth/logout.component";
-import { SignupComponent } from "./auth/signup.component";
-import { SigninComponent } from "./auth/signin.component";
 
 @NgModule({
     declarations: [
-        AppComponent,
-        MessageComponent,
-        MessageListComponent,
-        MessageInputComponent,
-        MessagesComponent,
-        AuthenticationComponent,
-        HeaderComponent,
-        LogoutComponent,
-        SignupComponent,
-        SigninComponent
+    	AppComponent,
+    	MainComponent,
+    	MenuComponent,
+        IndexComponent
     ],
-    imports: [BrowserModule, FormsModule, routing, ReactiveFormsModule],
+    imports: [
+    	BrowserModule,
+        routing
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
 
 }
+
+// 
+//  

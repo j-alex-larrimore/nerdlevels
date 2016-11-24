@@ -39,8 +39,10 @@ module.exports = () =>{
                        vNumber = result.number;
                        pject = result.project;
                        cmpnt = result.component;
+                       console.log("Launching index");
                         h.watchedVideo({'user': req.user._id, 'video':vName});
                         res.render('index', {
+                        //res.render('AppComponent', {
                             user: req.user,
                             host: config.host,
                             vidName: vName,
@@ -133,6 +135,7 @@ module.exports = () =>{
                            }
                         });*/
                         h.watchedVideo({'user': req.user._id, 'video':result.name});
+                        console.log("Rendering index");
                         res.render('index', {
                             user: req.user,
                             host: config.host,
