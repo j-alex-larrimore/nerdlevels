@@ -144,6 +144,46 @@ h6 {
     margin-top: 0;
 }
 
+
+footer {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+.loginButton {
+    position: relative;
+    margin-top: 5em;
+    height: 150px;
+}
+
+.loginBtnImg {
+    position: relative;
+    top: 1px;
+    width: 350px;
+}
+
+#footer-img{
+    width: 40px;
+    height: auto;
+    display: inline;
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+}
+
+#gamepic{
+    margin-top: 3.5em;
+}
+
+#webpic{
+    margin-top: 2.5em;
+}
+
+
 @media(max-width:1199px) {
     ul.banner-social-buttons {
         float: left;
@@ -167,43 +207,16 @@ h6 {
     ul.banner-social-buttons > li:last-child {
         margin-bottom: 0;
     }
-}
 
-footer {
-    padding: 50px 0;
-    background-color: #f8f8f8;
+    .intro-header{
+        background-image: none;
+        background-color: black;
+    }
 
-}
+    .loginBtnImg{
+        width: 275px;
+    }
 
-p.copyright {
-    margin: 15px 0 0;
-}
 
-.loginButton {
-	position: relative;
-    margin-top: 5em;
-	height: 150px;
-}
-
-#loginBtnImg {
-	position: relative;
-	top: 1px;
-	width: 350px;
-}
-
-#footer-img{
-    width: 40px;
-    height: auto;
-    display: inline;
-    margin-bottom: 0.5em;
-    margin-left: 0.5em;
-}
-
-#gamepic{
-    margin-top: 3.5em;
-}
-
-#webpic{
-    margin-top: 2.5em;
 }
 

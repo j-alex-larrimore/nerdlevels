@@ -25,6 +25,18 @@ module.exports = () =>{
                    videoStream.pipe(res); 
                 });
             },
+            '/about':(req, res, next)=>{
+                res.render('about');
+            },
+            '/examples':(req, res, next)=>{
+                res.render('coming');
+            },
+            '/blog':(req, res, next)=>{
+                res.render('coming');
+            },
+            '/faq':(req, res, next)=>{
+                res.render('coming');
+            },
             '/index':[h.isAuthenticated, (req, res, next)=>{
                 var vName,
                     vNumber, 
@@ -187,7 +199,7 @@ module.exports = () =>{
         },
         'NA': (req, res, next) =>{
             //Should be processing from server.js
-            res.status(404).sendFile(process.cwd() + '/views/404.htm');
+            res.status(404).sendFile(process.cwd() + '/views/missing.htm');
         }
     }
 

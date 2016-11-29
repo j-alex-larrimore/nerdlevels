@@ -6,6 +6,7 @@ import { MenuComponent } from "./menucomponent/menu-component";
 import { IndexComponent } from "./index/index";
 
 const APP_ROUTES: Routes = [
+	{ path: '#', component: MainComponent, outlet: 'main' },
 	{ path: '', redirectTo: 'index', pathMatch: 'full' },
 	{ path: 'index', component: IndexComponent, children: [
 		{ path: 'MainComponent', component: MainComponent, outlet: 'main' },
@@ -20,7 +21,7 @@ export const routing = RouterModule.forRoot(APP_ROUTES);
 // { path: 'messages', component: MainComponent },
  //{ path: 'auth', component: AuthenticationComponent, children: AUTH_ROUTES }
 
- //{ path: '#', redirectTo: '/', pathMatch: 'full' }
+ //
 
 
 
