@@ -3,6 +3,27 @@ body{
 }
 /* The main content */
 
+a:hover{
+	cursor: pointer;
+}
+
+.videosDiv {
+	margin-left: auto;
+	margin-right: auto;
+	width: 600px;
+}
+
+video {
+	width: 600px;
+	height: auto;
+}
+
+#videoTitle{
+	/*font-family: 'Audiowide', cursive;*/
+	font-family: 'Exo', sans-serif;
+	margin-bottom: 50px;
+}
+
 .main-content {
 	padding: 120px 0px 40px 40px;
 	margin: 0 0 0 180px;
@@ -48,9 +69,9 @@ body{
 	background-color: #35393e;
 	text-align: left;
 	color:  #b3bcc5;
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: bold;
-	line-height: 2;
+	line-height: 1.5;
 	border-left-width: 2px;
 	border-left-style: solid;
 }
@@ -59,7 +80,7 @@ body{
 .sidebar-links div.selected > a{
 	background-color: #ffffff;
 	color: #565d63;
-	line-height: 2.3;
+	line-height: 2;
 	margin: 0;
 }
 
@@ -269,6 +290,17 @@ body{
 
 	.sidebar-links div.selected .sub-links {
 		bottom: -90px;
+	}
+
+	.videosDiv {
+		margin-left: auto;
+		margin-right: auto;
+		width: 280px;
+	}
+
+	video {
+		width: 280px;
+		height: auto;
 	}
 
 }

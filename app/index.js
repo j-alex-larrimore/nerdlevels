@@ -48,8 +48,9 @@ router.get('/', (req, res, next) =>{
     res.render('login');
 });*/
 
-
+//angRouter: require('./angRoutes')(),
 module.exports = {
+
     router: require('./routes')(),
     session: require('./session'),
     ioServer,

@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Video } from "./video.model";
+
 
 @Component({
     selector: 'main-component',
-    templateUrl: './main-component.html',
-    styleUrls: ['./main-component.css']
+    templateUrl: './main-component.html'
 })
 export class MainComponent {
+	@Input() video: Video;
 
 }

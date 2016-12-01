@@ -10,16 +10,10 @@ module.exports = () =>{
     let routes = {
         'get': {
             '/': (req, res, next)=> {
+                console.log("landing");
                 res.render('landing');
                 //res.render('index');
             },
-            //Can turn this route into an array so it runs isAuthenticated first
-            '/rooms':[h.isAuthenticated, (req, res, next)=>{
-                res.render('rooms', {
-                    user: req.user,
-                    host: config.host
-                });
-            }],
             '/aws/:id':(req, res, next)=>{
                 db.knoxClient.getFile(req.params.id, function(err, videoStream){
                    videoStream.pipe(res); 
@@ -37,22 +31,43 @@ module.exports = () =>{
             '/faq':(req, res, next)=>{
                 res.render('coming');
             },
+            '/index/:vName/:vidNum':[h.isAuthenticated, (req, res, next)=>{ 
+                    res.render('index', {
+                        track: "Web",
+                        vidName: req.params.vName,
+                        vidNumber: req.params.vidNum,
+                        project: "Platformer",
+                        component: "new+folder"
+                    });               
+            }],
             '/index':[h.isAuthenticated, (req, res, next)=>{
                 var vName,
                     vNumber, 
                     pject, 
                     cmpnt;
-                db.singleVideoModel.findOne({'name': 'Adding+a+Story.flv'}, function(err, result){
+
+                    res.redirect('/index/test0/12');
+
+                    /*res.render('index', {
+                        vidName: "test0.mp4",
+                        vidNumber: "12",
+                        project: "Platformer",
+                        component: "new+folder"
+                    });*/
+                /*db.singleVideoModel.findOne({'name': 'Adding+a+Story.flv'}, function(err, result){
                     if(err != null){
                         console.log(err);
                     }else if(result != null){
-                       
-                       vName = result.name;
+                       //vName = result.name;
                        vNumber = result.number;
                        pject = result.project;
-                       cmpnt = result.component;
-                       console.log("Launching index");
-                        h.watchedVideo({'user': req.user._id, 'video':vName});
+                       //cmpnt = result.component;
+                       vName = "test0";
+                        cmpnt = "new+folder";
+
+                       console.log("loading index");
+                       //MIGHT NEED NEXT LINE
+                       // h.watchedVideo({'user': req.user._id, 'video':vName});
                         res.render('index', {
                         //res.render('AppComponent', {
                             user: req.user,
@@ -62,10 +77,7 @@ module.exports = () =>{
                             project: pject,
                             component: cmpnt
                         });
-                        //h.getVideo('https://s3.amazonaws.com/nerdlevels/'+ pject +'/' + cmpnt +'/' + vName);
                         
-                        //var vid = h.getVideo('https://s3.amazonaws.com/nerdlevels/'+ pject +'/' + cmpnt +'/' + vName);
-                        //console.log(vid);
                         /*res.render('index', {
                             video: result
                          });*/
@@ -80,12 +92,12 @@ module.exports = () =>{
                                     video: result
                                 });
                            }
-                        });*/
+                        });
                         //res.send(result);
                     }else{
                         console.log("Video not found!");
                     }
-                })
+                })*/
                 
             }],
             //Using /:id allows us to extract the id and store it in id keyword
@@ -130,7 +142,7 @@ module.exports = () =>{
             '/setsession': (req, res, next)=>{
                 req.session.favColor = "Gray";
                 res.send("session set");
-            },
+            }/*,
             '/getvideo/:id':[h.isAuthenticated, (req, res, next)=>{
                 db.singleVideoModel.findOne({'name': req.params.id}, function(err, result){
                     if(err != null){
@@ -145,7 +157,7 @@ module.exports = () =>{
                                     video: result
                                 });
                            }
-                        });*/
+                        });*//*
                         h.watchedVideo({'user': req.user._id, 'video':result.name});
                         console.log("Rendering index");
                         res.render('index', {
@@ -160,7 +172,7 @@ module.exports = () =>{
                         console.log("Video not found!");
                     }
                 })
-            }]
+            }]*/
         },
         'post':{
             '/mail/contact_me.php' : (req, res, next) =>{

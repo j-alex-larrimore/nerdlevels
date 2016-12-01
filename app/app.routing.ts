@@ -5,14 +5,22 @@ import { MainComponent } from "./maincomponent/main-component";
 import { MenuComponent } from "./menucomponent/menu-component";
 import { IndexComponent } from "./index/index";
 
-const APP_ROUTES: Routes = [
-	{ path: '#', component: MainComponent, outlet: 'main' },
-	{ path: '', redirectTo: 'index', pathMatch: 'full' },
-	{ path: 'index', component: IndexComponent, children: [
+
+/*	
+	{ path: 'index/test', component: MainComponent, outlet: 'menu'},
+	{ path: 'index',  component: IndexComponent, children: [
 		{ path: 'MainComponent', component: MainComponent, outlet: 'main' },
 		{ path: 'MenuComponent', component: MenuComponent, outlet: 'menu' }
 	]},
-	{ path: 'index', component: IndexComponent}
+	
+		{ path: 'index/:vidName/:vidNum', component: IndexComponent },
+	
+	{ path: '**', component: IndexComponent}
+*/
+const APP_ROUTES: Routes = [
+	{ path: 'index/:vidName/:vidNum', component: IndexComponent },
+	{ path: '', redirectTo: 'index', pathMatch: 'full' },
+	{ path: 'index', pathMatch: 'full', component: IndexComponent}
    
 ];
 

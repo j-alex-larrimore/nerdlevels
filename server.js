@@ -14,26 +14,30 @@ app.use(express.static('public'));
 //automatically module imported and set 
 app.set('view engine', 'ejs');
 
+
+
+
 app.use('/', nerdLevels.session);
 //hooks passport up to express, connects to request and response streams
 app.use(passport.initialize());
 //hooks express session middleware to passport (serialize & deserializeuser functions)
 app.use(passport.session())
 //brings in analytic logging middleware
-app.use(require('morgan')('combined', {
+/*app.use(require('morgan')('combined', {
     stream: {
         write: message=>{
             //write to logs with Winston
             //////nerdLevels.logger.log('info', message);
         }
     }
-}));
+}));*/
 
 
 //Need to use these methods with body parser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+//app.use('/index', nerdLevels.angRouter);
 app.use('/', nerdLevels.router);
 //app.use(unless('/mail/contact_me.php', nerdLevels.router));
 

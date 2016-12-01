@@ -1,6 +1,6 @@
 'use strict';
 const config = require('../config');
-const logger = require('../logger');
+//const logger = require('../logger');
 const Mongoose = require('mongoose').connect(config.dbURI);
 const knox = require('knox');
 
@@ -24,11 +24,12 @@ const chatUser = new Mongoose.Schema({
 let userModel = Mongoose.model('chatUser', chatUser);
 
 var videoList = new Mongoose.Schema({
+        track:String,
         project:String,
         component:String,
         name:String,
         number:Number
-    })
+    });
     
 let singleVideoModel = Mongoose.model('videoList', videoList);
 
@@ -39,6 +40,8 @@ var knoxClient = knox.createClient({
     bucket: config.S3Bucket
 })
 
+
+//
 module.exports = {
     Mongoose, 
     userModel,

@@ -3,7 +3,7 @@
             <div class="header-limiter">
                 <h1>NerdLevels</h1>
                 <nav>
-                    <a href="#" class="selected">Learn</a>
+                    <a class="selected">Learn</a>
                     <a href="examples">Examples</a>
                     <a href="blog">Blog</a>
                     <a href="about">About</a>
@@ -16,15 +16,17 @@
 
     <aside class="sidebar-left-collapse">
 
-        <a href="#" class="company-logo"><img id="logo" src="/img/nerdlevels-logo-green.png" alt="NerdLevels"></a>
+        <a class="company-logo"><img id="logo" src="/img/nerdlevels-logo-green.png" alt="NerdLevels"></a>
         <!--<router-outlet name="menu"></router-outlet>-->
-        <menu-component></menu-component>
+        <menu-component (vidClicked)="loadVid($event)"></menu-component>
         
     </aside>
 
     
     
     <div class="main-content">
-    <main-component></main-component>
+    <main-component [video]="video"></main-component>
     <!--<router-outlet name="main"></router-outlet>-->
     </div>
+
+   <!--<script src="../../js/menuscript.js"></script>-->
