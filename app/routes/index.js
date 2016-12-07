@@ -45,14 +45,24 @@ module.exports = () =>{
                                      //console.log("Successfully updated user");
                                  }
                              });
-                            res.render('index', {
-                                track: "Web",
-                                vidName: req.params.vName,
-                                vidNumber: req.params.vidNum,
-                                project: "Platformer",
-                                vids: result,
-                                component: "new+folder"
-                            });   
+                            db.singleVideoModel.findOne({'name': req.params.vName}, function(err, result2){
+                                if(err!=null){
+                                    console.log(err);
+                                }else if(result != null){//Look up last view video from user and redirect to that one
+                                    
+                                    res.render('index', {
+                                        vidTrack: result2.track,
+                                        vidName: req.params.vName,
+                                        vidNumber: req.params.vidNum,
+                                        vidProject: result2.project,
+                                        vids: result,
+                                        vidComponent: result2.component
+                                    });   
+                                }else{
+                                    console.log("Null Video Response");
+                                }
+                            });
+                            
                         }
                     });
 

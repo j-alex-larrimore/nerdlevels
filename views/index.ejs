@@ -45,8 +45,13 @@
                 <%}else{%>
                      var template = $('#project').html();
                     var templateScript = Handlebars.compile(template);
+                    var selected = "";
                     
-                    var context = { "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+                    if('<%= vidProject %>' == "<%= vid.project %>"){
+                        selected = "selected";
+                    }
+
+                    var context = { "selected": selected, "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
                     var html = templateScript(context);
 
@@ -57,14 +62,18 @@
                         $('#web').append(html);
                     }
 
-
                      <%   projects.push(vid.project ); %> 
                 <%}%>
             <% }else{ %>
                     var template = $('#project').html();
                     var templateScript = Handlebars.compile(template);
+                    var selected = "";
                     
-                    var context = { "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+                    if('<%= vidProject %>' == "<%= vid.project %>"){
+                        selected = "selected";
+                    }
+
+                    var context = { "selected": selected, "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
                     var html = templateScript(context);
 
@@ -96,8 +105,13 @@
                 <%}else{%>
                     var template = $('#component').html();
                     var templateScript = Handlebars.compile(template);
+                    var selected = "";
                     
-                    var context = { "component" : "<%= vid.component %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+                    if('<%= vidComponent %>' == "<%= vid.component %>" && '<%= vidProject %>' == "<%= vid.project %>"){
+                        selected = "selected";
+                    }
+
+                    var context = { "selected": selected, "component" : "<%= vid.component %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
                     var html = templateScript(context);
 
@@ -108,8 +122,12 @@
             <% }else{ %>
                 var template = $('#component').html();
                     var templateScript = Handlebars.compile(template);
+                    var selected = "";
                     
-                    var context = { "component" : "<%= vid.component %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+                    if('<%= vidComponent %>' == "<%= vid.component %>" && '<%= vidProject %>' == "<%= vid.project %>"){
+                        selected = "selected";
+                    }
+                    var context = { "selected": selected, "component" : "<%= vid.component %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
                     var html = templateScript(context);
 
@@ -128,27 +146,35 @@
         <% vids.forEach(function(vid){ %>
             var template = $('#video').html();
             var templateScript = Handlebars.compile(template);
-                    
-            var context = { "name" : "<%= vid.name %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+            var current = "";
+
+            if('<%= vidName %>' == "<%= vid.name %>"){
+                current = "current";
+            }
+
+            var context = { "current": current, "name" : "<%= vid.name %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
             var html = templateScript(context);
             $("#<%=vid.project%><%=vid.component%>").append(html);
         <%})%>
 
-
-
-
-
-
-
-
-
-
+        //SETS THE CORRECT TRACK TO SELECTED
+        <% if(vidTrack == 'Web'){ %>
+            console.log("Web! " + '<%= vidTrack %>');
+            var element = document.getElementById("webClick"); 
+            element.classList.add("selected");
+        <% }else{ %>
+            console.log("Game!");
+            var element = document.getElementById("gameClick"); 
+            element.classList.add("selected"); 
+        <%}%>
+       
+        
 
 
         function playVideo(){
             var str = '<video controls>';
-str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= project %>/<%= component %>/<%= vidName %>.mp4" type="video/mp4">'; 
+str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidProject %>/<%= vidComponent %>/<%= vidName %>.mp4" type="video/mp4">'; 
             str+= '</video>';         
             $('.videosDiv').append(str);  
         }
@@ -178,12 +204,12 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= project %>/<%= comp
         </header>
 
             <script id="video" type="text/x-handlebars-template">
-                <li><div class="video"><a href={{link}}>{{name}}</a></div></li>
+                <li class={{current}}><div class="video"><a href={{link}}>{{name}}</a></div></li>
             </script>
     
             <script id="component" type="text/x-handlebars-template">
                 <div class= "sub-sub-links">
-                    <div class="clickable">
+                    <div class="clickable {{selected}}">
                         <a >{{component}} </a>
                     </div>
                     <ul id={{project}}{{component}} class="sub-sub-sub-links">
@@ -194,7 +220,7 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= project %>/<%= comp
 
             <script id="project" type="text/x-handlebars-template">
                 <div id={{project}} class="sub-links">
-                    <div class="clickable">
+                    <div class="clickable {{selected}}">
                         <a type='button'>{{project}} </a>
                     </div>
                 </div>    

@@ -122,6 +122,12 @@ video {
 	text-align: left;
 }
 
+.sidebar-links div .sub-sub-sub-links li.current div a {
+	background-color: #39FF14;
+	color: black;
+	padding-left: 2px;
+}
+
 /* Active Children of selected links */
 .sidebar-links div .sub-sub-sub-links a:active {
 	text-decoration: none;
