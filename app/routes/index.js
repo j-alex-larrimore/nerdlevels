@@ -40,7 +40,6 @@ module.exports = () =>{
                             req.user.save(error =>{
                                  if(error){
                                      console.log("Error updating user");
-                                     
                                  }else{
                                      //console.log("Successfully updated user");
                                  }
@@ -48,7 +47,7 @@ module.exports = () =>{
                             db.singleVideoModel.findOne({'name': req.params.vName}, function(err, result2){
                                 if(err!=null){
                                     console.log(err);
-                                }else if(result != null){//Look up last view video from user and redirect to that one
+                                }else if(result2 != null){//Look up last view video from user and redirect to that one
                                     
                                     res.render('index', {
                                         vidTrack: result2.track,
@@ -60,6 +59,14 @@ module.exports = () =>{
                                     });   
                                 }else{
                                     console.log("Null Video Response");
+                                    res.render('index', {
+                                        vidTrack: '',
+                                        vidName: '',
+                                        vidNumber: '',
+                                        vidProject: '',
+                                        vids: result,
+                                        vidComponent: ''
+                                    });   
                                 }
                             });
                             
