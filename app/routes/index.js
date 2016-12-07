@@ -31,22 +31,61 @@ module.exports = () =>{
             '/faq':(req, res, next)=>{
                 res.render('coming');
             },
-            '/index/:vName/:vidNum':[h.isAuthenticated, (req, res, next)=>{ 
-                    res.render('index', {
-                        track: "Web",
-                        vidName: req.params.vName,
-                        vidNumber: req.params.vidNum,
-                        project: "Platformer",
-                        component: "new+folder"
-                    });               
+            '/index/:vName/:vidNum':[h.isAuthenticated, (req, res, next)=>{
+                    db.singleVideoModel.find(function(err, result){
+                        if(err!=null){
+                            console.log(err);
+                        }else if(result != null){
+                            req.user.lastWatched = req.params.vName;
+                            req.user.save(error =>{
+                                 if(error){
+                                     console.log("Error updating user");
+                                     
+                                 }else{
+                                     //console.log("Successfully updated user");
+                                 }
+                             });
+                            res.render('index', {
+                                track: "Web",
+                                vidName: req.params.vName,
+                                vidNumber: req.params.vidNum,
+                                project: "Platformer",
+                                vids: result,
+                                component: "new+folder"
+                            });   
+                        }
+                    });
+
+                                
             }],
             '/index':[h.isAuthenticated, (req, res, next)=>{
                 var vName,
                     vNumber, 
                     pject, 
                     cmpnt;
+                    db.singleVideoModel.findOne({'name': req.user.lastWatched}, function(err, result){
+                        if(err!=null){
+                            console.log(err);
+                        }else if(result != null){//Look up last view video from user and redirect to that one
+                            res.redirect('/index/'+ result.name +'/' + result.number);
+                        }else{
+                            console.log("New User");
+                            res.redirect('/index/test0/12');
+                        }
+                    });
 
-                    res.redirect('/index/test0/12');
+                   /*db.singleVideoModel.find(function(err, result){
+                        if(err!=null){
+                            console.log(err);
+                        }else if(result != null){//Look up last view video from user and redirect to that one
+                            //console.log(result);
+                            res.redirect('/index/test0/12');
+                        }
+                    });*/
+                    
+
+
+                    
 
                     /*res.render('index', {
                         vidName: "test0.mp4",

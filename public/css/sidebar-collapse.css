@@ -42,7 +42,7 @@ video {
 	top: 0;
 	left: 0;
 	background-color: #292c2f;
-	width: 180px;
+	width: 250px;
 	height: 100%;
 	padding: 20px 0;
 }
@@ -111,7 +111,7 @@ video {
 .sidebar-links div div.selected ~ div, .sidebar-links div div.selected ~ div div.selected ~ ul{
 	max-height: 400px;
     overflow: auto;
-	padding: 2px 0 2px 30px;
+	padding: 2px 0 2px 20px;
 }
 
 /* Children of selected links */
@@ -301,6 +301,10 @@ video {
 	video {
 		width: 280px;
 		height: auto;
+	}
+
+	.videoTitle {
+		font-size: 20px;
 	}
 
 }

@@ -21,16 +21,131 @@
 	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
 
      <!--video.js-->
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.10.2/alt/video-js-cdn.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.10.2/video.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/3.0.2/videojs-contrib-hls.js"></script>
+       <script src="/js/viblast.js"></script>
+
+
     
 	<script src="/js/jquery-2.1.4.min.js"></script>
-    <script src="/js/menuscript.js"></script>
-     <script>
+    <script src="/js/handlebars-v4.0.5.js"></script>
+    <script>
     'use strict';
     $(() => {
-        
+        // BUILD LIST OF PROJECTS
+        <% var projects = []; %>
+        <% vids.forEach(function(vid){ %>
+            <% var repeat = false; %>
+            <% if(projects.length > 0){ %>
+                <% projects.forEach(function(project){ %>
+                    <%if(vid.project == project){ %>
+                        <% repeat = true; %>
+                    <%}%>
+                <%}) %>
+                <% if(repeat){ %>
+                    <% repeat = false; %>
+                <%}else{%>
+                     var template = $('#project').html();
+                    var templateScript = Handlebars.compile(template);
+                    
+                    var context = { "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+
+                    var html = templateScript(context);
+
+                    if('<%= vid.track %>' == 'Game'){
+                        // Insert the HTML code into the page
+                        $('#game').append(html);
+                    }else{
+                        $('#web').append(html);
+                    }
+
+
+                     <%   projects.push(vid.project ); %> 
+                <%}%>
+            <% }else{ %>
+                    var template = $('#project').html();
+                    var templateScript = Handlebars.compile(template);
+                    
+                    var context = { "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+
+                    var html = templateScript(context);
+
+                    if('<%= vid.track %>' == 'Game'){
+                        // Insert the HTML code into the page
+                        $('#game').append(html);
+                    }else{
+                        $('#web').append(html);
+                    }
+               <%   projects.push(vid.project ); %>
+            <%}   %>
+            
+               
+            
+      <% }) %>
+
+        //BUILD LIST OF COMPONENTS
+        <% var components = []; %>
+        <% vids.forEach(function(vid){ %>
+            <% var repeat = false; %>
+            <% if(components.length > 0){ %>
+                <% components.forEach(function(component){ %>
+                    <%if(vid.project+vid.component == component){ %>
+                        <% repeat = true; %>
+                    <%}%>
+                <%}) %>
+                <% if(repeat){ %>
+                    <% repeat = false; %>
+                <%}else{%>
+                    var template = $('#component').html();
+                    var templateScript = Handlebars.compile(template);
+                    
+                    var context = { "component" : "<%= vid.component %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+
+                    var html = templateScript(context);
+
+                    $("#<%=vid.project%>").append(html);
+                  
+                     <%   components.push(vid.project+vid.component); %> 
+                <%}%>
+            <% }else{ %>
+                var template = $('#component').html();
+                    var templateScript = Handlebars.compile(template);
+                    
+                    var context = { "component" : "<%= vid.component %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+
+                    var html = templateScript(context);
+
+                    $("#<%=vid.project%>").append(html);
+                    <%   components.push(vid.project+vid.component); %>
+            <%}   %>
+            
+               
+            
+      <% }) %>
+
+
+
+
+        //BUILD LIST OF VIDEOS
+        <% vids.forEach(function(vid){ %>
+            var template = $('#video').html();
+            var templateScript = Handlebars.compile(template);
+                    
+            var context = { "name" : "<%= vid.name %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+
+            var html = templateScript(context);
+            $("#<%=vid.project%><%=vid.component%>").append(html);
+        <%})%>
+
+
+
+
+
+
+
+
+
+
+
+
         function playVideo(){
             var str = '<video controls>';
 str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= project %>/<%= component %>/<%= vidName %>.mp4" type="video/mp4">'; 
@@ -42,13 +157,95 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= project %>/<%= comp
         
     });
     </script>
+   
 </head>
 
 <body>
+
+    <header class="header-basic">
+
+            <div class="header-limiter">
+                <h1>NerdLevels</h1>
+                <nav>
+                    <a class="selected">Learn</a>
+                    <a href="examples">Examples</a>
+                    <a href="blog">Blog</a>
+                    <a href="about">About</a>
+                    <a href="faq">Faq</a>
+                </nav>
+            </div>
+
+        </header>
+
+            <script id="video" type="text/x-handlebars-template">
+                <li><div class="video"><a href={{link}}>{{name}}</a></div></li>
+            </script>
+    
+            <script id="component" type="text/x-handlebars-template">
+                <div class= "sub-sub-links">
+                    <div class="clickable">
+                        <a >{{component}} </a>
+                    </div>
+                    <ul id={{project}}{{component}} class="sub-sub-sub-links">
+
+                    </ul>
+                </div>
+            </script>
+
+            <script id="project" type="text/x-handlebars-template">
+                <div id={{project}} class="sub-links">
+                    <div class="clickable">
+                        <a type='button'>{{project}} </a>
+                    </div>
+                </div>    
+            </script>
+
     <my-app></my-app>
+
     <script src="/js/app/bundle.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	
+	<script>
+     $(function () {
+            var links = $('.sidebar-links > div > .clickable ~ div > .clickable ~ div > .clickable');
+            
+            links.on('click', function () {
+                if($(this).hasClass("selected")){
+                    links.removeClass('selected');
+                }else{
+                    links.removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });  
+          });  
+            
+        $(function () {
+            var links = $('.sidebar-links > div > .clickable ~ div > .clickable');
+            
+            links.on('click', function () {
+                if($(this).hasClass("selected")){
+                    links.removeClass('selected');
+                }else{
+                    links.removeClass('selected');
+                    $(this).addClass('selected');
+                }
+
+            });    
+        });
+        
+        $(function () {
+             var links = $('.sidebar-links > div > .clickable'); 
+            
+             links.on('click', function () {
+                if($(this).hasClass("selected")){
+                    links.removeClass('selected');
+                }else{
+                    links.removeClass('selected');
+                    $(this).addClass('selected');
+                }
+
+             });    
+        });
+     </script>
 
 </body>
 

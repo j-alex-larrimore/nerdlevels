@@ -11,7 +11,7 @@
 .header-basic .header-limiter {
 	/*max-width: 1200px;*/
 	text-align: center;
-    margin: 0 0 0 180px;
+    margin: 0 0 0 250px;
     padding: 0 20px 0 20px;
 	/*margin: 0 auto;*/
 }
@@ -56,6 +56,13 @@
 	opacity: 1;
 }
 
+.header-basic .header-limiter nav a.nogo {
+	/*color: #33383b;*/
+	color: gray;
+	font-style: italic;
+	pointer-events: none;
+}
+
 .header-basic .header-limiter nav a.selected {
 	color: #39FF14;
 	pointer-events: none;
@@ -63,6 +70,12 @@
 }
 
 /* Making the header responsive */
+@media all and (max-width:800px) {
+	.header-basic .header-limiter nav a {
+		font-size: 13px;
+        padding: 0 2px;
+	}
+}
 
 @media all and (max-width: 600px) {
 
@@ -93,6 +106,7 @@
 		font-size: 10px;
         padding: 0 2px;
 	}
+
 
 }
 

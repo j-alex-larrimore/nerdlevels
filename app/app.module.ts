@@ -4,14 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from "./app.component";
 import { MainComponent } from "./maincomponent/main-component";
 import { MenuComponent } from "./menucomponent/menu-component";
-import { IndexComponent } from "./index/index";import { routing } from "./app.routing";
+import { TrackComponent } from "./trackcomponent/track-component";
+import { ComponentComponent } from "./componentcomponent/component-component";
+import { ProjectComponent } from "./projectcomponent/project-component";
+import { IndexComponent } from "./index/index";
+import { routing } from "./app.routing";
 
 @NgModule({
     declarations: [
     	AppComponent,
     	MainComponent,
     	MenuComponent,
-        IndexComponent
+        IndexComponent,
+        TrackComponent,
+        ProjectComponent,
+        ComponentComponent
     ],
     imports: [
     	BrowserModule,

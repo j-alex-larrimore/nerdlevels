@@ -1,9 +1,10 @@
         console.log("running menuscript");    
            
-        $(function () {
+    /*    $(function () {
 			var links = $('.sidebar-links > div > .clickable ~ div > .clickable ~ div > .clickable');
-
+            
 			links.on('click', function () {
+                console.log("3rd tier click!");
                 if($(this).hasClass("selected")){
                     links.removeClass('selected');
                 }else{
@@ -14,10 +15,10 @@
           });  
             
 		$(function () {
-            //, .sublinks, .sub-sub-links, 
 			var links = $('.sidebar-links > div > .clickable ~ div > .clickable');
-
+            
 			links.on('click', function () {
+                console.log("2nd tier click!");
                 if($(this).hasClass("selected")){
                     links.removeClass('selected');
                 }else{
@@ -29,9 +30,10 @@
 		});
         
         $(function () {
-			var links = $('.sidebar-links > div > .clickable');
-
-			links.on('click', function () {
+			 var links = $('.sidebar-links > div > .clickable'); 
+            
+			 links.on('click', function () { %>
+                console.log("1st tier click!");
                 if($(this).hasClass("selected")){
                     links.removeClass('selected');
                 }else{
@@ -39,8 +41,8 @@
                     $(this).addClass('selected');
                 }
 
-			});    
-		});
+			 });    
+		});*/
 
        /* $(function () {
 			var links = $('.sidebar-links  div.video a');

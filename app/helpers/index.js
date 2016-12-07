@@ -38,6 +38,7 @@ const crypto = require('crypto');
         let newChatUser = new db.userModel({
             profileId: profile.id,
             fullName: profile.displayName,
+            lastWatched: "",
             profilePic: profile.photos[0].value || ''
         });
          
