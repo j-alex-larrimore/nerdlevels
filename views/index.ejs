@@ -111,7 +111,7 @@
                         selected = "selected";
                     }
 
-                    var context = { "selected": selected, "component" : "<%= vid.displaycomponent %>", "displaycomponent" : "<%= vid.displaycomponent %>",    "project" : "<%= vid.project %>", "link" : "index/<%= vid.displayname %>/<%= vid.number %>" };
+                    var context = { "selected": selected, "component" : "<%= vid.component %>", "displaycomponent" : "<%= vid.displaycomponent %>",    "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
                     var html = templateScript(context);
 
@@ -127,7 +127,7 @@
                     if('<%= vidComponent %>' == "<%= vid.component %>" && '<%= vidProject %>' == "<%= vid.project %>"){
                         selected = "selected";
                     }
-                    var context = { "selected": selected, "component" : "<%= vid.component %>", "displaycomponent" : "<%= vid.displaycomponent %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.displayname %>/<%= vid.number %>" };
+                    var context = { "selected": selected, "component" : "<%= vid.component %>", "displaycomponent" : "<%= vid.displaycomponent %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
                     var html = templateScript(context);
 
