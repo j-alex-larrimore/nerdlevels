@@ -111,7 +111,7 @@
                         selected = "selected";
                     }
 
-                    var context = { "selected": selected, "component" : "<%= vid.component %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+                    var context = { "selected": selected, "component" : "<%= vid.displaycomponent %>", "displaycomponent" : "<%= vid.displaycomponent %>",    "project" : "<%= vid.project %>", "link" : "index/<%= vid.displayname %>/<%= vid.number %>" };
 
                     var html = templateScript(context);
 
@@ -127,7 +127,7 @@
                     if('<%= vidComponent %>' == "<%= vid.component %>" && '<%= vidProject %>' == "<%= vid.project %>"){
                         selected = "selected";
                     }
-                    var context = { "selected": selected, "component" : "<%= vid.component %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+                    var context = { "selected": selected, "component" : "<%= vid.component %>", "displaycomponent" : "<%= vid.displaycomponent %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.displayname %>/<%= vid.number %>" };
 
                     var html = templateScript(context);
 
@@ -152,7 +152,7 @@
                 current = "current";
             }
 
-            var context = { "current": current, "name" : "<%= vid.name %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+            var context = { "current": current, "name" : "<%= vid.displayname %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
             var html = templateScript(context);
             $("#<%=vid.project%><%=vid.component%>").append(html);
@@ -160,11 +160,9 @@
 
         //SETS THE CORRECT TRACK TO SELECTED
         <% if(vidTrack == 'Web'){ %>
-            console.log("Web! " + '<%= vidTrack %>');
             var element = document.getElementById("webClick"); 
             element.classList.add("selected");
         <% }else{ %>
-            console.log("Game!");
             var element = document.getElementById("gameClick"); 
             element.classList.add("selected"); 
         <%}%>
@@ -174,7 +172,7 @@
 
         function playVideo(){
             var str = '<video controls>';
-str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidProject %>/<%= vidComponent %>/<%= vidName %>.mp4" type="video/mp4">'; 
+str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vidProject %>/<%= vidComponent %>/<%= vidName %>" type="video/mp4">'; 
             str+= '</video>';         
             $('.videosDiv').append(str);  
         }
@@ -210,7 +208,7 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidProject %>/<%= v
             <script id="component" type="text/x-handlebars-template">
                 <div class= "sub-sub-links">
                     <div class="clickable {{selected}}">
-                        <a >{{component}} </a>
+                        <a >{{displaycomponent}} </a>
                     </div>
                     <ul id={{project}}{{component}} class="sub-sub-sub-links">
 

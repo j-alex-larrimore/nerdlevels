@@ -4,13 +4,11 @@ export class Video {
 	component: string;
 	name: string;
 	number: number;
+	displayname: string;
+	displaycomponent: string;
 
-	constructor(track: string, project: string, component: string, name: string, number: number) {
-		this.track = track;
-		this.project = project;
-		this.component = component;
+	constructor(name: string) {
 		this.name = name;
-		this.number = number;
 	}
 }
 

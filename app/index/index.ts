@@ -8,7 +8,7 @@ import { Video } from "../maincomponent/video.model";
     templateUrl: './index.html'
 })
 export class IndexComponent {
-	video: Video = new Video('Web Development', 'Resume', 'new+folder', 'test2.mp4', 1);
+	video: Video = new Video('Introduction');
 	private sub: any;
 
 	constructor(private route: ActivatedRoute){}
@@ -16,13 +16,9 @@ export class IndexComponent {
 	ngOnInit(){
 		this.sub = this.route.params.subscribe(params=> {
 			if(params['vidName'] != null){
-				this.video = new Video('Web Development', 'Resume', 'new+folder', params['vidName'], +params['vidNum']);
+				this.video = new Video(params['vidName']);
 			}
 		});
 	}
 
-
-	/*loadVid(vid){
-		this.video = new Video(vid[0], vid[1], vid[2], vid[3]);
-	}*/
 }

@@ -44,16 +44,18 @@ module.exports = () =>{
                                      //console.log("Successfully updated user");
                                  }
                              });
+                            console.log(req.params.vName);
                             db.singleVideoModel.findOne({'name': req.params.vName}, function(err, result2){
                                 if(err!=null){
                                     console.log(err);
                                 }else if(result2 != null){//Look up last view video from user and redirect to that one
-                                    
                                     res.render('index', {
                                         vidTrack: result2.track,
-                                        vidName: req.params.vName,
+                                        vidName: result2.name,
                                         vidNumber: req.params.vidNum,
                                         vidProject: result2.project,
+                                        vidDisplayComponent: result2.displaycomponent,
+                                        vidDisplayName: result2.displayname,
                                         vids: result,
                                         vidComponent: result2.component
                                     });   
@@ -65,6 +67,8 @@ module.exports = () =>{
                                         vidNumber: '',
                                         vidProject: '',
                                         vids: result,
+                                        vidDisplayComponent: '',
+                                        vidDisplayName: '',
                                         vidComponent: ''
                                     });   
                                 }
@@ -84,10 +88,10 @@ module.exports = () =>{
                         if(err!=null){
                             console.log(err);
                         }else if(result != null){//Look up last view video from user and redirect to that one
-                            res.redirect('/index/'+ result.name +'/' + result.number);
+                            res.redirect('/index/'+ result.displayname +'/' + result.number);
                         }else{
                             console.log("New User");
-                            res.redirect('/index/test0/12');
+                            res.redirect('/index/Introduction/1');
                         }
                     });
 
