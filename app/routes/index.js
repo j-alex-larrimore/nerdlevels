@@ -88,10 +88,10 @@ module.exports = () =>{
                         if(err!=null){
                             console.log(err);
                         }else if(result != null){//Look up last view video from user and redirect to that one
-                            res.redirect('/index/'+ result.displayname +'/' + result.number);
+                            res.redirect('/index/'+ result.name +'/' + result.number);
                         }else{
                             console.log("New User");
-                            res.redirect('/index/Introduction/1');
+                            res.redirect('/index/introduction.mp4/1');
                         }
                     });
 
