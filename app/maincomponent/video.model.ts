@@ -3,7 +3,9 @@ export class Video {
 	project: string;
 	component: string;
 	name: string;
-	number: number;
+	projnumber: string;
+	compnumber: string;
+	number: string;
 	displayname: string;
 	displaycomponent: string;
 

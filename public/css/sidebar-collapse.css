@@ -7,14 +7,23 @@ a:hover{
 	cursor: pointer;
 }
 
-.videosDiv {
+.videosDiv, .checklistDiv {
 	margin-left: auto;
 	margin-right: auto;
-	width: 600px;
+	width: 800px;
+}
+
+.checklistDiv {
+	padding-left: 200px;
+	max-width: 100%;
+}
+
+img {
+	max-width: 90%;
 }
 
 video {
-	width: 600px;
+	width: 800px;
 	height: auto;
 }
 
@@ -232,6 +241,10 @@ video {
        position: inherit;
     }
 
+    .checklistDiv {
+		padding-left: 60px;
+	}
+
 	/*.sidebar-links div ul.sub-links {
 		display: none;
 	}
@@ -311,6 +324,10 @@ video {
 
 	.videoTitle {
 		font-size: 20px;
+	}
+
+	.checklistDiv {
+		padding-left: 10px;
 	}
 
 }

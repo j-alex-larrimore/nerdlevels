@@ -32,7 +32,7 @@ module.exports = () =>{
                 res.render('coming');
             },
             '/index/:vName/:vidNum':[h.isAuthenticated, (req, res, next)=>{
-                    db.singleVideoModel.find(function(err, result){
+                    db.singleVideoModel.find({}).sort({ projnumber: 1, compnumber : 1, number: 1}).exec(function(err, result){
                         if(err!=null){
                             console.log(err);
                         }else if(result != null){
@@ -44,13 +44,13 @@ module.exports = () =>{
                                      //console.log("Successfully updated user");
                                  }
                              });
-                            console.log(req.params.vName);
                             db.singleVideoModel.findOne({'name': req.params.vName}, function(err, result2){
                                 if(err!=null){
                                     console.log(err);
                                 }else if(result2 != null){//Look up last view video from user and redirect to that one
                                     res.render('index', {
                                         vidTrack: result2.track,
+                                        fileType: result2.filetype,
                                         vidName: result2.name,
                                         vidNumber: req.params.vidNum,
                                         vidProject: result2.project,

@@ -29,9 +29,12 @@ var videoList = new Mongoose.Schema({
         project:String,
         component:String,
         name:String,
-        number:Number,
+        projnumber: String,
+        compnumber: String,
+        number:String,
         displayname: String,
-        displaycomponent: String
+        displaycomponent: String,
+        filetype: String
     });
     
 let singleVideoModel = Mongoose.model('videoList', videoList);
