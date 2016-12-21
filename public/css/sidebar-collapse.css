@@ -7,7 +7,7 @@ a:hover{
 	cursor: pointer;
 }
 
-.videosDiv, .checklistDiv {
+.videosDiv, .checklistDiv, #scriptDiv {
 	margin-left: auto;
 	margin-right: auto;
 	width: 800px;
@@ -16,6 +16,14 @@ a:hover{
 .checklistDiv {
 	padding-left: 200px;
 	max-width: 100%;
+}
+
+#scriptDiv{
+	font-size: 24px;
+	margin-top: 25px;
+	color: white;
+	line-height: 150%;
+	font-family: 'Dosis', sans-serif;
 }
 
 img {
@@ -196,7 +204,15 @@ video {
    #video1 {
 		position: static;
 	}
+
+	#scriptDiv, .videosDiv, video {
+		width: 600px;
+	}
     
+	#scriptDiv{
+		font-size: 20px;
+	}
+
 	.main-content{
 		max-width: none;
 		padding: 10px 20px;
@@ -311,10 +327,14 @@ video {
 		bottom: -90px;
 	}
 
-	.videosDiv {
+	.videosDiv, #scriptDiv {
 		margin-left: auto;
 		margin-right: auto;
 		width: 280px;
+	}
+
+	#scriptDiv{
+		font-size: 14px;
 	}
 
 	video {

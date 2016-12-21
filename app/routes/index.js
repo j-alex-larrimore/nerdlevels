@@ -56,6 +56,7 @@ module.exports = () =>{
                                         vidProject: result2.project,
                                         vidDisplayComponent: result2.displaycomponent,
                                         vidDisplayName: result2.displayname,
+                                        vidScript: result2.script,
                                         vids: result,
                                         vidComponent: result2.component
                                     });   
@@ -69,6 +70,7 @@ module.exports = () =>{
                                         vids: result,
                                         vidDisplayComponent: '',
                                         vidDisplayName: '',
+                                        vidScript: '',
                                         vidComponent: ''
                                     });   
                                 }

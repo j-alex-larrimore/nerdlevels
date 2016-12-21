@@ -34,6 +34,7 @@ var videoList = new Mongoose.Schema({
         number:String,
         displayname: String,
         displaycomponent: String,
+        script: String,
         filetype: String
     });
     

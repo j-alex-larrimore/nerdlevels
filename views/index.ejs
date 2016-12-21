@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="/css/sidebar-collapse.css">
     <link rel="stylesheet" href="/css/header-basic.css">
     
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
@@ -139,22 +140,31 @@
       <% }) %>
 
 
-
+        
 
         //BUILD LIST OF VIDEOS
         <% vids.forEach(function(vid){ %>
             var template = $('#video').html();
             var templateScript = Handlebars.compile(template);
             var current = "";
-
+            var script = "";
             if('<%= vidName %>' == "<%= vid.name %>"){
                 current = "current";
+                console.log(script + "<%= vidName %>");
+                //IF THIS IS CURRENT VIDEO SET SCRIPT
+                var template2 = $('#written').html(); 
+                var templateScript2 = Handlebars.compile(template2); 
+                script = "<%= vid.script %>"; 
+                var context = { "script": script  }; 
+                var html = templateScript2(context); 
+                $("#scriptDiv").append(html); 
             }
 
             var context = { "current": current, "project": "vid.project", "name" : "<%= vid.displayname %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
             var html = templateScript(context);
             $("#<%=vid.project%><%=vid.component%>").append(html);
+
         <%})%>
 
         //SETS THE CORRECT TRACK TO SELECTED
@@ -167,10 +177,6 @@
         <%}%>
        
         //ADDS SCRIPTS TO VIDEOS
-
-
-       
-
 
         function playVideo(){
             var str = '<video controls>';
@@ -210,6 +216,9 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
             </div>
 
         </header>
+            <script id="written" type="text/x-handlebars-template">
+                {{script}}
+            </script>
 
             <script id="video" type="text/x-handlebars-template">
                 <li id={{name}}{{project}} class={{current}}><div class="video"><a href={{link}}>{{name}}</a></div></li>
@@ -235,10 +244,62 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
             </script>
 
     <my-app></my-app>
+    <header class="header-basic">
+
+            <div class="header-limiter">
+                <h1>NerdLevels</h1>
+                <nav>
+                    <a class="selected">Learn</a>
+                    <a class="nogo" href="examples">Examples</a>
+                    <a class="nogo" href="blog">Blog</a>
+                    <a href="about">About</a>
+                    <a class="nogo" href="faq">FAQ</a>
+                </nav>
+            </div>
+
+        </header>
+
+
+    <aside class="sidebar-left-collapse">
+
+        <a class="company-logo"><img id="logo" src="/img/nerdlevels-logo-green.png" alt="NerdLevels"></a>
+        <div id="test" class="sidebar-links">
+        <div id="web" class="link">
+            <div id="webClick" class="clickable link-blue">
+                <a>
+                    <i class="fa fa-desktop"></i>Web Development
+                </a>
+            </div>
+
+        </div>
+        <div id="game" class="link">
+            <div id="gameClick" class="clickable link-red">
+                    <a>
+                        <i class="fa fa-gamepad"></i>Game Development
+                    </a>
+            </div>
+         
+        </div>
+    </div>
+        
+    </aside>
+
+    
+    
+    <div class="main-content">
+        <div class="videosDiv">
+        </div>
+        <div class="checklistDiv">
+        </div>
+        <div id="scriptDiv">
+        </div>
+    </div>
+
 
     <script src="/js/app/bundle.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script>
+
      $(function () {
             var links = $('.sidebar-links > div > .clickable ~ div > .clickable ~ div > .clickable');
             
