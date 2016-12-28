@@ -21,8 +21,8 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
 
-     <!--video.js-->
-       <script src="/js/viblast.js"></script>
+     <!--video.js
+       <script src="/js/viblast.js"></script>-->
 
 
     
@@ -143,24 +143,37 @@
         
 
         //BUILD LIST OF VIDEOS
+        var currentVid = ""; 
+        var currentProject = ""; 
         <% vids.forEach(function(vid){ %>
             var template = $('#video').html();
             var templateScript = Handlebars.compile(template);
             var current = "";
             var script = "";
+            var watched = "hidden";
+            <% user.watchedVideos.forEach(function(seen){ %>
+                if("<%= seen %>" == "<%= vid.name %><%= vid.project %>"){
+                   watched = "visible";  
+                }
+            <% }) %>
+
             if('<%= vidName %>' == "<%= vid.name %>"){
                 current = "current";
-                console.log(script + "<%= vidName %>");
                 //IF THIS IS CURRENT VIDEO SET SCRIPT
                 var template2 = $('#written').html(); 
                 var templateScript2 = Handlebars.compile(template2); 
                 script = "<%= vid.script %>"; 
                 var context = { "script": script  }; 
                 var html = templateScript2(context); 
-                $("#scriptDiv").append(html); 
+                $("#scriptDiv").append(html);
+                //SET FOR LATER
+                currentVid = "<%= vid.name %>";
+                currentProject = "<%= vid.project %>";
             }
 
-            var context = { "current": current, "project": "vid.project", "name" : "<%= vid.displayname %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+            
+
+            var context = { "current": current, "watched": watched, "project": "<% vid.project %>", "id":"<%= vid.name %><%= vid.project %>", "name" : "<%= vid.displayname %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
             var html = templateScript(context);
             $("#<%=vid.project%><%=vid.component%>").append(html);
@@ -171,11 +184,22 @@
         <% if(vidTrack == 'Web'){ %>
             var element = document.getElementById("webClick"); 
             element.classList.add("selected");
+            scrollToSelected(true);
         <% }else{ %>
             var element = document.getElementById("gameClick"); 
             element.classList.add("selected"); 
+            scrollToSelected(false);
         <%}%>
        
+        //function to scroll to correct menu position
+       function scrollToSelected(isWeb){
+                var scrollTarget = document.getElementById(currentVid+currentProject);
+                var topPos = scrollTarget.offsetTop;
+                document.getElementById('sidebar').scrollTop = topPos-10;
+                var startPos =  document.getElementById(currentProject).offsetTop;
+                document.getElementById(currentProject).scrollTop = topPos - startPos - 150;
+        }
+
         //ADDS SCRIPTS TO VIDEOS
 
         function playVideo(){
@@ -183,18 +207,23 @@
 str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vidProject %>/<%= vidComponent %>/<%= vidName %>" type="video/mp4">'; 
             str+= '</video>';         
             $('.videosDiv').append(str);  
+            
         }
        
         function addChecklist(){
             var str = '<img src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vidProject %>/<%= vidComponent %>/<%= vidName %>">';
             $('.checklistDiv').append(str); 
+            
         }
+
+
 
        <% if(fileType == 'Video'){ %>
             playVideo();
         <%}else if(fileType == 'Checklist'){ %>
             addChecklist();
         <%} %>
+
     });
     </script>
    
@@ -221,7 +250,7 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
             </script>
 
             <script id="video" type="text/x-handlebars-template">
-                <li id={{name}}{{project}} class={{current}}><div class="video"><a href={{link}}>{{name}}</a></div></li>
+                <li id={{id}} class={{current}}><div class="video"><a href={{link}}>{{name}}  <i id="check" class="fa fa-check" style="visibility:{{watched}}"></i></a></div></li>
             </script>
     
             <script id="component" type="text/x-handlebars-template">
@@ -260,7 +289,7 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
         </header>
 
 
-    <aside class="sidebar-left-collapse">
+    <aside id="sidebar" class="sidebar-left-collapse">
 
         <a class="company-logo"><img id="logo" src="/img/nerdlevels-logo-green.png" alt="NerdLevels"></a>
         <div id="test" class="sidebar-links">
@@ -287,9 +316,9 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
     
     
     <div class="main-content">
-        <div class="videosDiv">
+        <div id="videosDiv" class="videosDiv">
         </div>
-        <div class="checklistDiv">
+        <div id="checklistDiv" class="checklistDiv">
         </div>
         <div id="scriptDiv">
         </div>
@@ -299,6 +328,9 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
     <script src="/js/app/bundle.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script>
+    
+
+
 
      $(function () {
             var links = $('.sidebar-links > div > .clickable ~ div > .clickable ~ div > .clickable');

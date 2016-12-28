@@ -7,6 +7,10 @@ a:hover{
 	cursor: pointer;
 }
 
+#check{
+	width: 2px;
+}
+
 .videosDiv, .checklistDiv, #scriptDiv {
 	margin-left: auto;
 	margin-right: auto;

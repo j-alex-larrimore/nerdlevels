@@ -40,7 +40,7 @@ var videoList = new Mongoose.Schema({
     
 let singleVideoModel = Mongoose.model('videoList', videoList);
 
-//First try and making knox work in this project?
+//First try and make knox work in this project?
 var knoxClient = knox.createClient({
     key: config.AWS_ACCESS_KEY_ID,
     secret: config.AWS_SECRET_ACCESS_KEY,

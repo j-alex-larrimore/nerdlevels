@@ -2,7 +2,7 @@
 const h = require('../helpers');
 
 module.exports = (io, app) =>{
-    let allrooms = app.locals.chatrooms;
+   /* let allrooms = app.locals.chatrooms;
     
     //io.of means we are listening in to roomslist pipeline.
     //.on assigns an event listener for an event called connection, when client connects in
@@ -12,6 +12,6 @@ module.exports = (io, app) =>{
             socket.emit('chatRoomsList', JSON.stringify(allrooms));
         });
        
-    });
+    });*/
    
 }

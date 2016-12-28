@@ -12,7 +12,6 @@ module.exports = () =>{
             '/': (req, res, next)=> {
                 console.log("landing");
                 res.render('landing');
-                //res.render('index');
             },
             '/aws/:id':(req, res, next)=>{
                 db.knoxClient.getFile(req.params.id, function(err, videoStream){
@@ -41,6 +40,7 @@ module.exports = () =>{
                                  if(error){
                                      console.log("Error updating user");
                                  }else{
+
                                      //console.log("Successfully updated user");
                                  }
                              });
@@ -48,7 +48,9 @@ module.exports = () =>{
                                 if(err!=null){
                                     console.log(err);
                                 }else if(result2 != null){//Look up last view video from user and redirect to that one
+                                    h.watchedVideo({'user':req.user._id, 'video': (result2.name + result2.project)});
                                     res.render('index', {
+                                        user: req.user,
                                         vidTrack: result2.track,
                                         fileType: result2.filetype,
                                         vidName: result2.name,
@@ -88,7 +90,7 @@ module.exports = () =>{
                     cmpnt;
                     db.singleVideoModel.findOne({'name': req.user.lastWatched}, function(err, result){
                         if(err!=null){
-                            console.log(err);
+                            console.log("indexerr" + err);
                         }else if(result != null){//Look up last view video from user and redirect to that one
                             res.redirect('/index/'+ result.name +'/' + result.number);
                         }else{
@@ -96,71 +98,7 @@ module.exports = () =>{
                             res.redirect('/index/introduction.mp4/1');
                         }
                     });
-
-                   /*db.singleVideoModel.find(function(err, result){
-                        if(err!=null){
-                            console.log(err);
-                        }else if(result != null){//Look up last view video from user and redirect to that one
-                            //console.log(result);
-                            res.redirect('/index/test0/12');
-                        }
-                    });*/
-                    
-
-
-                    
-
-                    /*res.render('index', {
-                        vidName: "test0.mp4",
-                        vidNumber: "12",
-                        project: "Platformer",
-                        component: "new+folder"
-                    });*/
-                /*db.singleVideoModel.findOne({'name': 'Adding+a+Story.flv'}, function(err, result){
-                    if(err != null){
-                        console.log(err);
-                    }else if(result != null){
-                       //vName = result.name;
-                       vNumber = result.number;
-                       pject = result.project;
-                       //cmpnt = result.component;
-                       vName = "test0";
-                        cmpnt = "new+folder";
-
-                       console.log("loading index");
-                       //MIGHT NEED NEXT LINE
-                       // h.watchedVideo({'user': req.user._id, 'video':vName});
-                        res.render('index', {
-                        //res.render('AppComponent', {
-                            user: req.user,
-                            host: config.host,
-                            vidName: vName,
-                            vidNumber: vNumber,
-                            project: pject,
-                            component: cmpnt
-                        });
-                        
-                        /*res.render('index', {
-                            video: result
-                         });*/
-                          
-                        /*db.knoxClient.getFile('https://s3.amazonaws.com/nerdlevels/'+ pject +'/' + cmpnt +'/' + vName, function(err, result){
-                        
-                           if(err != null){
-                               console.log(err);
-                           }else{
-                               console.log("Got video file");
-                               res.render('index', {
-                                    video: result
-                                });
-                           }
-                        });
-                        //res.send(result);
-                    }else{
-                        console.log("Video not found!");
-                    }
-                })*/
-                
+               
             }],
             //Using /:id allows us to extract the id and store it in id keyword
             '/chat/:id':[h.isAuthenticated, (req, res, next)=>{
@@ -204,37 +142,7 @@ module.exports = () =>{
             '/setsession': (req, res, next)=>{
                 req.session.favColor = "Gray";
                 res.send("session set");
-            }/*,
-            '/getvideo/:id':[h.isAuthenticated, (req, res, next)=>{
-                db.singleVideoModel.findOne({'name': req.params.id}, function(err, result){
-                    if(err != null){
-                        console.log(err);
-                    }else if(result != null){
-                        /*db.knoxClient.getFile('https://s3.amazonaws.com/nerdlevels/'+ result.project +'/' + result.component +'/' + result.name, function(err, result){
-                           if(err != null){
-                               console.log(err);
-                           }else{
-                               console.log("Got video file");
-                                res.render('index', {
-                                    video: result
-                                });
-                           }
-                        });*//*
-                        h.watchedVideo({'user': req.user._id, 'video':result.name});
-                        console.log("Rendering index");
-                        res.render('index', {
-                            user: req.user,
-                            host: config.host,
-                            vidName: result.name,
-                            vidNumber: result.number,
-                            project: result.project,
-                            component: result.component
-                        });
-                    }else{
-                        console.log("Video not found!");
-                    }
-                })
-            }]*/
+            }
         },
         'post':{
             '/mail/contact_me.php' : (req, res, next) =>{

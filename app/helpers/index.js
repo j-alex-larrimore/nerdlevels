@@ -77,14 +77,14 @@ const crypto = require('crypto');
  
  let findRoomByName = (allrooms, room) => {
      //findIndex operates on arrays and gives reference to an element, its index and an array
-     let findRoom = allrooms.findIndex((element, index, array) => {
+    /* let findRoom = allrooms.findIndex((element, index, array) => {
          if(element.room === room){
              return true;
          }else{
              return false;
          }
      });
-     return findRoom > -1 ? true : false;
+     return findRoom > -1 ? true : false;*/
  }
  
  let randomHex = () => {
@@ -92,18 +92,18 @@ const crypto = require('crypto');
  }
  
  let findRoomById = (allrooms, roomID) => {
-     return allrooms.find((element, index, array) => {
+     /*return allrooms.find((element, index, array) => {
          if(element.roomID = roomID){
              return true;
          }else{
              return false;
          }
-     });
+     });*/
  }
  
  //Add user to chatroom
  let addUserToRoom = (allrooms, data, socket) => {
-     let getRoom = findRoomById(allrooms, data.roomID);
+     /*let getRoom = findRoomById(allrooms, data.roomID);
      if(getRoom !== undefined){
          let userID = socket.request.session.passport.user;
          let checkUser = getRoom.users.findIndex((element, index, array) =>{
@@ -128,11 +128,11 @@ const crypto = require('crypto');
          socket.join(data.roomID);
          
          return getRoom;
-     }
+     }*/
  }
  
  let removeUserFromRoom = (allrooms, socket) =>{
-     for(let room of allrooms){
+     /*for(let room of allrooms){
          let findUser = room.users.findIndex((element, index, array) => {
              if(element.socketID === socket.id){
                  return true;
@@ -146,18 +146,18 @@ const crypto = require('crypto');
             room.users.splice(findUser, 1);
              return room;
          }
-     }
+     }*/
  }
  
  let getVideo = (req, res) =>{
-     db.knoxClient.getFile(req, function(err, videoStream){
+     /*db.knoxClient.getFile(req, function(err, videoStream){
          if(err){
              console.log(err);
          }else{
              //var readableStream = fs.createReadStream(h.getVideo('https://s3.amazonaws.com/nerdlevels/'+ pject +'/' + cmpnt +'/' + vName));
-                        /*videoStream.on('data', function(chunk){
-                           data+=chunk; 
-                        });*/
+                        //videoStream.on('data', function(chunk){
+                        //   data+=chunk; 
+                        //});
                         
                         videoStream.on('end', function(){
                            console.log("Video read end!"); 
@@ -167,13 +167,13 @@ const crypto = require('crypto');
      });
      //return db.knoxClient.get(req);
      
-     //return 
+     //return */
  }
  
+ //Used in watchedVideo function
   function contains(a, obj) {
     var i = a.length;
     while (i--) {
-        console.log(a[i] + " " + obj);
        if (a[i] === obj) {
            return true;
        }
@@ -192,14 +192,14 @@ const crypto = require('crypto');
              if(result.watchedVideos != null && !contains(result.watchedVideos, req.video)){
                 result.update({$push: {"watchedVideos": req.video}}, function(err, result){
                     if(err != null){
-                         console.log(err);
+                         console.log("ERR:" + err);
                     }else{
                         console.log("Watched video Added!");
                     }
                 });
             }else{
                  
-             }
+            }
          }
              
          
