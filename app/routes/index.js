@@ -13,11 +13,6 @@ module.exports = () =>{
                 console.log("landing");
                 res.render('landing');
             },
-            '/aws/:id':(req, res, next)=>{
-                db.knoxClient.getFile(req.params.id, function(err, videoStream){
-                   videoStream.pipe(res); 
-                });
-            },
             '/about':(req, res, next)=>{
                 res.render('about');
             },
@@ -40,7 +35,6 @@ module.exports = () =>{
                                  if(error){
                                      console.log("Error updating user");
                                  }else{
-
                                      //console.log("Successfully updated user");
                                  }
                              });
@@ -49,7 +43,9 @@ module.exports = () =>{
                                     console.log(err);
                                 }else if(result2 != null){//Look up last view video from user and redirect to that one
                                     h.watchedVideo({'user':req.user._id, 'video': (result2.name + result2.project)});
+                                    console.log(result2.vidid + " " + result2.name);
                                     res.render('index', {
+                                        vidID: result2.vidid,
                                         user: req.user,
                                         vidTrack: result2.track,
                                         fileType: result2.filetype,
@@ -61,7 +57,7 @@ module.exports = () =>{
                                         vidScript: result2.script,
                                         vids: result,
                                         vidComponent: result2.component
-                                    });   
+                                    });
                                 }else{
                                     console.log("Null Video Response");
                                     res.render('index', {
@@ -74,19 +70,19 @@ module.exports = () =>{
                                         vidDisplayName: '',
                                         vidScript: '',
                                         vidComponent: ''
-                                    });   
+                                    });
                                 }
                             });
-                            
+
                         }
                     });
 
-                                
+
             }],
             '/index':[h.isAuthenticated, (req, res, next)=>{
                 var vName,
-                    vNumber, 
-                    pject, 
+                    vNumber,
+                    pject,
                     cmpnt;
                     db.singleVideoModel.findOne({'name': req.user.lastWatched}, function(err, result){
                         if(err!=null){
@@ -98,24 +94,7 @@ module.exports = () =>{
                             res.redirect('/index/introduction.mp4/1');
                         }
                     });
-               
-            }],
-            //Using /:id allows us to extract the id and store it in id keyword
-            '/chat/:id':[h.isAuthenticated, (req, res, next)=>{
-                //Find a chatroom with given id. We can access stuff like :id by using req.params
-                let getRoom = h.findRoomById(req.app.locals.chatrooms, req.params.id);
-                if(getRoom === undefined){
-                    return next();
-                }else{
-                    //render if id is found
-                    res.render('chatroom', {
-                        user: req.user,
-                        host: config.host,
-                        room: getRoom.room,
-                        roomID: getRoom.roomID
-                    });
-                }
-                
+
             }],
             '/auth/facebook': passport.authenticate('facebook'),
             '/auth/facebook/callback': passport.authenticate('facebook', {
@@ -146,7 +125,7 @@ module.exports = () =>{
         },
         'post':{
             '/mail/contact_me.php' : (req, res, next) =>{
-                
+
                 // create reusable transporter object using the default SMTP transport
                 var transporter = nodemailer.createTransport("SMTP",{
                     host: "smtp.gmail.com",
@@ -159,8 +138,8 @@ module.exports = () =>{
                     pass: config.emailPwd
                     }
                 });
-                
-                
+
+
                 // setup e-mail data with unicode symbols
                 var mailOptions = {
                     from: req.body.email, // sender address

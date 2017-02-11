@@ -34,10 +34,11 @@ var videoList = new Mongoose.Schema({
         number:String,
         displayname: String,
         displaycomponent: String,
+        vidid: String,
         script: String,
         filetype: String
     });
-    
+
 let singleVideoModel = Mongoose.model('videoList', videoList);
 
 //First try and make knox work in this project?
@@ -50,7 +51,7 @@ var knoxClient = knox.createClient({
 
 //
 module.exports = {
-    Mongoose, 
+    Mongoose,
     userModel,
     singleVideoModel,
     knoxClient

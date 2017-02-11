@@ -10,11 +10,11 @@
 	<title>NerdLevels</title>
     <link rel="icon" type="image/png" href="/img/nerdlevels-logo-green.png" />
 	<!--<link rel="stylesheet" href="assets/demo.css">-->
-    
-        
+
+
 	<link rel="stylesheet" href="/css/sidebar-collapse.css">
     <link rel="stylesheet" href="/css/header-basic.css">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
@@ -25,12 +25,13 @@
        <script src="/js/viblast.js"></script>-->
 
 
-    
-	<script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.10.0.min.js"></script>
+	  <script src="/js/jquery-2.1.4.min.js"></script>
     <script src="/js/handlebars-v4.0.5.js"></script>
     <script>
     'use strict';
     $(() => {
+
         // BUILD LIST OF PROJECTS
         <% var projects = []; %>
         <% vids.forEach(function(vid){ %>
@@ -47,7 +48,7 @@
                      var template = $('#project').html();
                     var templateScript = Handlebars.compile(template);
                     var selected = "";
-                    
+
                     if('<%= vidProject %>' == "<%= vid.project %>"){
                         selected = "selected";
                     }
@@ -63,13 +64,13 @@
                         $('#web').append(html);
                     }
 
-                     <%   projects.push(vid.project ); %> 
+                     <%   projects.push(vid.project ); %>
                 <%}%>
             <% }else{ %>
                     var template = $('#project').html();
                     var templateScript = Handlebars.compile(template);
                     var selected = "";
-                    
+
                     if('<%= vidProject %>' == "<%= vid.project %>"){
                         selected = "selected";
                     }
@@ -86,9 +87,9 @@
                     }
                <%   projects.push(vid.project ); %>
             <%}   %>
-            
-               
-            
+
+
+
       <% }) %>
 
         //BUILD LIST OF COMPONENTS
@@ -108,7 +109,7 @@
                     var template = $('#component').html();
                     var templateScript = Handlebars.compile(template);
                     var selected = "";
-                    
+
                     if('<%= vidComponent %>' == "<%= vid.component %>" && '<%= vidProject %>' == "<%= vid.project %>"){
                         selected = "selected";
                     }
@@ -117,14 +118,14 @@
 
                     var html = templateScript(context);
 
-                    $("#<%=vid.project%>").append(html);                 
-                     <%   components.push(vid.project+vid.component); %> 
+                    $("#<%=vid.project%>").append(html);
+                     <%   components.push(vid.project+vid.component); %>
                 <%}%>
             <% }else{ %>
                     var template = $('#component').html();
                     var templateScript = Handlebars.compile(template);
                     var selected = "";
-                    
+
                     if('<%= vidComponent %>' == "<%= vid.component %>" && '<%= vidProject %>' == "<%= vid.project %>"){
                         selected = "selected";
                     }
@@ -135,16 +136,16 @@
                     $("#<%=vid.project%>").append(html);
                     <%   components.push(vid.project+vid.component); %>
             <%}   %>
-            
-                    
+
+
       <% }) %>
 
 
-        
+
 
         //BUILD LIST OF VIDEOS
-        var currentVid = ""; 
-        var currentProject = ""; 
+        var currentVid = "";
+        var currentProject = "";
         <% vids.forEach(function(vid){ %>
             var template = $('#video').html();
             var templateScript = Handlebars.compile(template);
@@ -153,25 +154,25 @@
             var watched = "hidden";
             <% user.watchedVideos.forEach(function(seen){ %>
                 if("<%= seen %>" == "<%= vid.name %><%= vid.project %>"){
-                   watched = "visible";  
+                   watched = "visible";
                 }
             <% }) %>
 
             if('<%= vidName %>' == "<%= vid.name %>"){
                 current = "current";
                 //IF THIS IS CURRENT VIDEO SET SCRIPT
-                var template2 = $('#written').html(); 
-                var templateScript2 = Handlebars.compile(template2); 
-                script = "<%= vid.script %>"; 
-                var context = { "script": script  }; 
-                var html = templateScript2(context); 
+                var template2 = $('#written').html();
+                var templateScript2 = Handlebars.compile(template2);
+                script = "<%= vid.script %>";
+                var context = { "script": script  };
+                var html = templateScript2(context);
                 $("#scriptDiv").append(html);
                 //SET FOR LATER
                 currentVid = "<%= vid.name %>";
                 currentProject = "<%= vid.project %>";
             }
 
-            
+
 
             var context = { "current": current, "watched": watched, "project": "<% vid.project %>", "id":"<%= vid.name %><%= vid.project %>", "name" : "<%= vid.displayname %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
 
@@ -182,15 +183,15 @@
 
         //SETS THE CORRECT TRACK TO SELECTED
         <% if(vidTrack == 'Web'){ %>
-            var element = document.getElementById("webClick"); 
+            var element = document.getElementById("webClick");
             element.classList.add("selected");
             scrollToSelected(true);
         <% }else{ %>
-            var element = document.getElementById("gameClick"); 
-            element.classList.add("selected"); 
+            var element = document.getElementById("gameClick");
+            element.classList.add("selected");
             scrollToSelected(false);
         <%}%>
-       
+
         //function to scroll to correct menu position
        function scrollToSelected(isWeb){
                 var scrollTarget = document.getElementById(currentVid+currentProject);
@@ -203,17 +204,14 @@
         //ADDS SCRIPTS TO VIDEOS
 
         function playVideo(){
-            var str = '<video controls>';
-str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vidProject %>/<%= vidComponent %>/<%= vidName %>" type="video/mp4">'; 
-            str+= '</video>';         
-            $('.videosDiv').append(str);  
-            
+            var str = '<iframe src="https://player.vimeo.com/video/<%= vidID %>" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+            $('.videosDiv').append(str);
         }
-       
+
         function addChecklist(){
             var str = '<img src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vidProject %>/<%= vidComponent %>/<%= vidName %>">';
-            $('.checklistDiv').append(str); 
-            
+            $('.checklistDiv').append(str);
+
         }
 
 
@@ -226,7 +224,7 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
 
     });
     </script>
-   
+
 </head>
 
 <body>
@@ -252,7 +250,7 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
             <script id="video" type="text/x-handlebars-template">
                 <li id={{id}} class={{current}}><div class="video"><a href={{link}}>{{name}}  <i id="check" class="fa fa-check" style="visibility:{{watched}}"></i></a></div></li>
             </script>
-    
+
             <script id="component" type="text/x-handlebars-template">
                 <div class= "sub-sub-links">
                     <div class="clickable {{selected}}">
@@ -269,7 +267,7 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
                     <div class="clickable {{selected}}">
                         <a type='button'>{{project}} </a>
                     </div>
-                </div>    
+                </div>
             </script>
 
     <my-app></my-app>
@@ -307,16 +305,18 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
                         <i class="fa fa-gamepad"></i>Game Development
                     </a>
             </div>
-         
+
         </div>
     </div>
-        
+
     </aside>
 
-    
-    
+
+
     <div class="main-content">
         <div id="videosDiv" class="videosDiv">
+
+
         </div>
         <div id="checklistDiv" class="checklistDiv">
         </div>
@@ -328,13 +328,13 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
     <script src="/js/app/bundle.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script>
-    
+
 
 
 
      $(function () {
             var links = $('.sidebar-links > div > .clickable ~ div > .clickable ~ div > .clickable');
-            
+
             links.on('click', function () {
                 if($(this).hasClass("selected")){
                     links.removeClass('selected');
@@ -342,12 +342,12 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
                     links.removeClass('selected');
                     $(this).addClass('selected');
                 }
-            });  
-          });  
-            
+            });
+          });
+
         $(function () {
             var links = $('.sidebar-links > div > .clickable ~ div > .clickable');
-            
+
             links.on('click', function () {
                 if($(this).hasClass("selected")){
                     links.removeClass('selected');
@@ -356,12 +356,12 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
                     $(this).addClass('selected');
                 }
 
-            });    
+            });
         });
-        
+
         $(function () {
-             var links = $('.sidebar-links > div > .clickable'); 
-            
+             var links = $('.sidebar-links > div > .clickable');
+
              links.on('click', function () {
                 if($(this).hasClass("selected")){
                     links.removeClass('selected');
@@ -370,7 +370,7 @@ str+= ' <source src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vid
                     $(this).addClass('selected');
                 }
 
-             });    
+             });
         });
      </script>
 

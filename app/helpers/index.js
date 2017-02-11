@@ -2,6 +2,8 @@
 const router = require('express').Router();
 const db = require('../db');
 const crypto = require('crypto');
+const AWS = require('aws-sdk');
+const knox = require('knox');
 
 //underscores in names in JS don't do anything but denote that they are going to be used privately
  let _registerRoutes = (routes, method) => {
@@ -19,19 +21,19 @@ const crypto = require('crypto');
          }
      }
  }
- 
+
  let route = routes=> {
      _registerRoutes(routes);
      return router;
  }
- 
+
  //Find a single user based on a key
  let findOne = profileID =>{
      return db.userModel.findOne({
-        'profileId': profileID 
+        'profileId': profileID
      });
  }
- 
+
  //create new user & return it
  let createNewUser = profile =>{
      return new Promise((resolve, reject) =>{
@@ -41,7 +43,7 @@ const crypto = require('crypto');
             lastWatched: "",
             profilePic: profile.photos[0].value || ''
         });
-         
+
          newChatUser.save(error =>{
              if(error){
                  console.log("Error creating user");
@@ -52,7 +54,7 @@ const crypto = require('crypto');
          });
      });
  }
- 
+
  //ES6 promisified version of findById
  let findById = id => {
      return new Promise((resolve, reject)=>{
@@ -65,7 +67,7 @@ const crypto = require('crypto');
          });
      });
  }
- 
+
  //middleware function to check if user is authenticated & logged in
  let isAuthenticated = (req, res, next) =>{
      if(req.isAuthenticated()){
@@ -74,7 +76,7 @@ const crypto = require('crypto');
          res.redirect('/');
      }
  }
- 
+
  let findRoomByName = (allrooms, room) => {
      //findIndex operates on arrays and gives reference to an element, its index and an array
     /* let findRoom = allrooms.findIndex((element, index, array) => {
@@ -86,11 +88,11 @@ const crypto = require('crypto');
      });
      return findRoom > -1 ? true : false;*/
  }
- 
+
  let randomHex = () => {
      return crypto.randomBytes(24).toString('hex');
  }
- 
+
  let findRoomById = (allrooms, roomID) => {
      /*return allrooms.find((element, index, array) => {
          if(element.roomID = roomID){
@@ -100,7 +102,7 @@ const crypto = require('crypto');
          }
      });*/
  }
- 
+
  //Add user to chatroom
  let addUserToRoom = (allrooms, data, socket) => {
      /*let getRoom = findRoomById(allrooms, data.roomID);
@@ -113,24 +115,24 @@ const crypto = require('crypto');
                 return false;
             }
          });
-         
+
          if(checkUser > -1){
              getRoom.users.splice(checkUser, 1);
          }
-         
+
          getRoom.users.push({
             socketID: socket.id,
              userID,
              user: data.user,
              userPic: data.userPic
          });
-         
+
          socket.join(data.roomID);
-         
+
          return getRoom;
      }*/
  }
- 
+
  let removeUserFromRoom = (allrooms, socket) =>{
      /*for(let room of allrooms){
          let findUser = room.users.findIndex((element, index, array) => {
@@ -140,7 +142,7 @@ const crypto = require('crypto');
                  return false;
              }
          });
-         
+
          if(findUser > -1){
              socket.leave(room.roomID);
             room.users.splice(findUser, 1);
@@ -148,28 +150,23 @@ const crypto = require('crypto');
          }
      }*/
  }
- 
+
  let getVideo = (req, res) =>{
-     /*db.knoxClient.getFile(req, function(err, videoStream){
+   //subbed actual path for req
+
+  /* db.knoxClient.getFile("https://s3.amazonaws.com/nerdlevels/Game/Platformer/gui/GUI+checklist.png", function(err, res){
          if(err){
              console.log(err);
          }else{
-             //var readableStream = fs.createReadStream(h.getVideo('https://s3.amazonaws.com/nerdlevels/'+ pject +'/' + cmpnt +'/' + vName));
-                        //videoStream.on('data', function(chunk){
-                        //   data+=chunk; 
-                        //});
-                        
-                        videoStream.on('end', function(){
-                           console.log("Video read end!"); 
-                        });
+           console.log(res.statusCode);
          }
-         return null;
-     });
-     //return db.knoxClient.get(req);
-     
-     //return */
+         return null;s
+     });*/
+
  }
- 
+
+
+
  //Used in watchedVideo function
   function contains(a, obj) {
     var i = a.length;
@@ -180,7 +177,7 @@ const crypto = require('crypto');
     }
     return false;
 }
- 
+
  let watchedVideo = (req, res) => {
      //Find user in DB
      //Check current watched videos to see if this is already there
@@ -198,20 +195,19 @@ const crypto = require('crypto');
                     }
                 });
             }else{
-                 
+
             }
          }
-             
-         
+
+
      });
  }
- 
 
- 
+
  let unwatchVideo = (req, res) => {
-     
+
  }
- 
+
  module.exports = {
      route,
      findOne,
