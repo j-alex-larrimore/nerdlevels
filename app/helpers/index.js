@@ -40,6 +40,7 @@ const knox = require('knox');
         let newChatUser = new db.userModel({
             profileId: profile.id,
             fullName: profile.displayName,
+            email: profile.email,
             lastWatched: "",
             profilePic: profile.photos[0].value || ''
         });

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="UTF-8">
+  </head>
+  <body>
+    <form>
+      <p>Provide Access to User: </p>
+      <input type="text" id="user">
+      <p>Access Type: </p>
+      <input type="text" id="access">
+      <input id="submitButton" value="Submit" onclick="submitted()">
+    </form>
+  <script>
+    function submitted(){
+      var user = document.getElementById("user").value;
+      var access = document.getElementById("access").value;
+      console.log(user + " " + access);
+      location.href = "../accessgiven/"+user+"/"+access;
+    }
+  </script>
+  </body>
+</html>

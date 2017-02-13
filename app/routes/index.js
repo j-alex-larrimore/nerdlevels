@@ -22,10 +22,51 @@ module.exports = () =>{
             '/blog':(req, res, next)=>{
                 res.render('coming');
             },
+            '/nouser':(req, res, next)=>{
+              res.render('nouser');
+            },
+            '/accesserror':(req, res, next)=>{
+              res.render('accesserror');
+            },
+            '/accessgiven/:email/:access':[h.isAuthenticated, (req, res, next)=>{
+              //Checks if current user is an admin and makes sure they aren't granting admin privileges
+              if(req.user.access != "admin" || req.params.access == "admin"){
+                console.log("AG access error");
+                res.redirect("accesserror");
+              }else{
+                db.userModel.findOne({'email': req.params.email}, function(err, result){
+                    if(err!= null){
+                      //No user found
+                      console.log("AG not found");
+                      res.redirect("nouser");
+                    }else{
+                      result.access = req.params.access;
+                      result.save(error =>{
+                           if(error){
+                               console.log("Error updating user");
+                           }else{
+                               console.log("Successfully added access");
+                           }
+                       });
+                      res.render('accessgiven');
+                    }
+                });
+
+              }
+            }],
+            '/access':[h.isAuthenticated, (req, res, next)=>{
+              if(req.user.access != "admin"){
+                console.log("AE");
+                res.redirect("accesserror");
+              }else{
+                console.log("access");
+                res.render('access');
+              }
+            }],
             '/faq':(req, res, next)=>{
                 res.render('coming');
             },
-            '/index/:vName/:vidNum':[h.isAuthenticated, (req, res, next)=>{
+            '/index/:vName/:vProject/:vTrack':[h.isAuthenticated, (req, res, next)=>{
                     db.singleVideoModel.find({}).sort({ projnumber: 1, compnumber : 1, number: 1}).exec(function(err, result){
                         if(err!=null){
                             console.log(err);
@@ -42,15 +83,22 @@ module.exports = () =>{
                                 if(err!=null){
                                     console.log(err);
                                 }else if(result2 != null){//Look up last view video from user and redirect to that one
+                                  //If user does not have access send them to an error page
+                                  if(req.user.access != "admin" &&
+                                    req.user.access != "full"){
+                                    res.redirect("../../../accesserror");
+                                  }else{
+
                                     h.watchedVideo({'user':req.user._id, 'video': (result2.name + result2.project)});
                                     console.log(result2.vidid + " " + result2.name);
+
                                     res.render('index', {
                                         vidID: result2.vidid,
                                         user: req.user,
                                         vidTrack: result2.track,
                                         fileType: result2.filetype,
                                         vidName: result2.name,
-                                        vidNumber: req.params.vidNum,
+                                        vidNumber: result2.number,
                                         vidProject: result2.project,
                                         vidDisplayComponent: result2.displaycomponent,
                                         vidDisplayName: result2.displayname,
@@ -58,6 +106,7 @@ module.exports = () =>{
                                         vids: result,
                                         vidComponent: result2.component
                                     });
+                                  }
                                 }else{
                                     console.log("Null Video Response");
                                     res.render('index', {
@@ -80,18 +129,14 @@ module.exports = () =>{
 
             }],
             '/index':[h.isAuthenticated, (req, res, next)=>{
-                var vName,
-                    vNumber,
-                    pject,
-                    cmpnt;
                     db.singleVideoModel.findOne({'name': req.user.lastWatched}, function(err, result){
                         if(err!=null){
                             console.log("indexerr" + err);
                         }else if(result != null){//Look up last view video from user and redirect to that one
-                            res.redirect('/index/'+ result.name +'/' + result.number);
+                            res.redirect('/index/'+ result.name +'/' + result.project + '/' + result.track);
                         }else{
                             console.log("New User");
-                            res.redirect('/index/introduction.mp4/1');
+                            res.redirect('/index/introduction.mp4/Platformer/Game');
                         }
                     });
 

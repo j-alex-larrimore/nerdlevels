@@ -17,6 +17,8 @@ const chatUser = new Mongoose.Schema({
     profilePic: String,
     watchedVideos:[String],
     lastWatched: String,
+    access: [String],
+    email: String,
     subscription: {type: Boolean, default: false},
     subscriptionEnd: {type: Date, default: now }
 });
