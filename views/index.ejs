@@ -174,7 +174,7 @@
 
 
 
-            var context = { "current": current, "watched": watched, "project": "<% vid.project %>", "id":"<%= vid.name %><%= vid.project %>", "name" : "<%= vid.displayname %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+            var context = { "current": current, "watched": watched, "project": "<% vid.project %>", "id":"<%= vid.name %><%= vid.project %>", "name" : "<%= vid.displayname %>", "link" : "index/<%= vid.name %>/<%= vid.project %>/<%= vid.track %>" };
 
             var html = templateScript(context);
             $("#<%=vid.project%><%=vid.component%>").append(html);
