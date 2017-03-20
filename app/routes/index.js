@@ -13,6 +13,10 @@ module.exports = () =>{
                 console.log("landing");
                 res.render('landing');
             },
+            '/landingOld': (req, res, next)=>{
+                res.render('landingOld');
+
+            },
             '/about':(req, res, next)=>{
                 res.render('about');
             },
