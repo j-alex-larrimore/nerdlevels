@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>NerdLevels</title>
+    <link rel="icon" type="image/png" href="/img/nerdlevels-logo-green.png" />
+	<!--<link rel="stylesheet" href="assets/demo.css">-->
+
+
+	<link rel="stylesheet" href="/css/sidebar-collapse.css">
+    <link rel="stylesheet" href="/css/header-basic.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+
+     <!--video.js
+       <script src="/js/viblast.js"></script>-->
+
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.10.0.min.js"></script>
+	  <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/handlebars-v4.0.5.js"></script>
+    <script>
+    'use strict';
+    $(() => {
+
+        // BUILD LIST OF PROJECTS
+        <% var projects = []; %>
+        <% vids.forEach(function(vid){ %>
+            <% var repeat = false; %>
+            <% if(projects.length > 0){ %>
+                <% projects.forEach(function(project){ %>
+                    <%if(vid.project == project){ %>
+                        <% repeat = true; %>
+                    <%}%>
+                <%}) %>
+                <% if(repeat){ %>
+                    <% repeat = false; %>
+                <%}else{%>
+                     var template = $('#project').html();
+                    var templateScript = Handlebars.compile(template);
+                    var selected = "";
+
+                    if('<%= vidProject %>' == "<%= vid.project %>"){
+                        selected = "selected";
+                    }
+
+                    var context = { "selected": selected, "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+
+                    var html = templateScript(context);
+
+                    if('<%= vid.track %>' == 'Game'){
+                        // Insert the HTML code into the page
+                        $('#game').append(html);
+                    }else{
+                        $('#web').append(html);
+                    }
+
+                     <%   projects.push(vid.project ); %>
+                <%}%>
+            <% }else{ %>
+                    var template = $('#project').html();
+                    var templateScript = Handlebars.compile(template);
+                    var selected = "";
+
+                    if('<%= vidProject %>' == "<%= vid.project %>"){
+                        selected = "selected";
+                    }
+
+                    var context = { "selected": selected, "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+
+                    var html = templateScript(context);
+
+                    if('<%= vid.track %>' == 'Game'){
+                        // Insert the HTML code into the page
+                        $('#game').append(html);
+                    }else{
+                        $('#web').append(html);
+                    }
+               <%   projects.push(vid.project ); %>
+            <%}   %>
+
+
+
+      <% }) %>
+
+        //BUILD LIST OF COMPONENTS
+        <% var components = []; %>
+        <% vids.forEach(function(vid){ %>
+            <% var repeat = false; %>
+            <% if(components.length > 0){ %>
+                <% components.forEach(function(component){ %>
+                    <%if(vid.project+vid.component == component){ %>
+                        <% repeat = true; %>
+                    <%}%>
+                <%}) %>
+                <% if(repeat){ %>
+                    <% repeat = false; %>
+                <%}else{%>
+
+                    var template = $('#component').html();
+                    var templateScript = Handlebars.compile(template);
+                    var selected = "";
+
+                    if('<%= vidComponent %>' == "<%= vid.component %>" && '<%= vidProject %>' == "<%= vid.project %>"){
+                        selected = "selected";
+                    }
+
+                    var context = { "selected": selected, "component" : "<%= vid.component %>", "displaycomponent" : "<%= vid.displaycomponent %>",    "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+
+                    var html = templateScript(context);
+
+                    $("#<%=vid.project%>").append(html);
+                     <%   components.push(vid.project+vid.component); %>
+                <%}%>
+            <% }else{ %>
+                    var template = $('#component').html();
+                    var templateScript = Handlebars.compile(template);
+                    var selected = "";
+
+                    if('<%= vidComponent %>' == "<%= vid.component %>" && '<%= vidProject %>' == "<%= vid.project %>"){
+                        selected = "selected";
+                    }
+                    var context = { "selected": selected, "component" : "<%= vid.component %>", "displaycomponent" : "<%= vid.displaycomponent %>", "project" : "<%= vid.project %>", "link" : "index/<%= vid.name %>/<%= vid.number %>" };
+
+                    var html = templateScript(context);
+
+                    $("#<%=vid.project%>").append(html);
+                    <%   components.push(vid.project+vid.component); %>
+            <%}   %>
+
+
+      <% }) %>
+
+
+
+
+        //BUILD LIST OF VIDEOS
+        var currentVid = "";
+        var currentProject = "";
+        <% vids.forEach(function(vid){ %>
+            var template = $('#video').html();
+            var templateScript = Handlebars.compile(template);
+            var current = "";
+            var script = "";
+            var watched = "hidden";
+            <% user.watchedVideos.forEach(function(seen){ %>
+                if("<%= seen %>" == "<%= vid.name %><%= vid.project %>"){
+                   watched = "visible";
+                }
+            <% }) %>
+
+            if('<%= vidName %>' == "<%= vid.name %>"){
+                current = "current";
+                //IF THIS IS CURRENT VIDEO SET SCRIPT
+                var template2 = $('#written').html();
+                var templateScript2 = Handlebars.compile(template2);
+                script = "<%= vid.script %>";
+                var context = { "script": script  };
+                var html = templateScript2(context);
+                $("#scriptDiv").append(html);
+                //SET FOR LATER
+                currentVid = "<%= vid.name %>";
+                currentProject = "<%= vid.project %>";
+            }
+
+
+
+            var context = { "current": current, "watched": watched, "project": "<% vid.project %>", "id":"<%= vid.name %><%= vid.project %>", "name" : "<%= vid.displayname %>", "link" : "index/<%= vid.name %>/<%= vid.project %>/<%= vid.track %>" };
+
+            var html = templateScript(context);
+            $("#<%=vid.project%><%=vid.component%>").append(html);
+
+        <%})%>
+
+        //SETS THE CORRECT TRACK TO SELECTED
+        <% if(vidTrack == 'Web'){ %>
+            var element = document.getElementById("webClick");
+            element.classList.add("selected");
+            scrollToSelected(true);
+        <% }else{ %>
+            var element = document.getElementById("gameClick");
+            element.classList.add("selected");
+            scrollToSelected(false);
+        <%}%>
+
+        //function to scroll to correct menu position
+       function scrollToSelected(isWeb){
+                var scrollTarget = document.getElementById(currentVid+currentProject);
+                var topPos = scrollTarget.offsetTop;
+                document.getElementById('sidebar').scrollTop = topPos-10;
+                var startPos =  document.getElementById(currentProject).offsetTop;
+                document.getElementById(currentProject).scrollTop = topPos - startPos - 150;
+        }
+
+        //ADDS SCRIPTS TO VIDEOS
+
+        function playVideo(){
+            var str = '<iframe src="https://player.vimeo.com/video/<%= vidID %>" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+            $('.videosDiv').append(str);
+        }
+
+        function addChecklist(){
+            var str = '<img src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vidProject %>/<%= vidComponent %>/<%= vidName %>">';
+            $('.checklistDiv').append(str);
+
+        }
+
+
+
+       <% if(fileType == 'Video'){ %>
+            playVideo();
+        <%}else if(fileType == 'Checklist'){ %>
+            addChecklist();
+        <%} %>
+
+    });
+    </script>
+
+</head>
+
+<body>
+            <script id="written" type="text/x-handlebars-template">
+                {{script}}
+            </script>
+
+            <script id="video" type="text/x-handlebars-template">
+                <li id={{id}} class={{current}}><div class="video"><a href={{link}}>{{name}}  <i id="check" class="fa fa-check" style="visibility:{{watched}}"></i></a></div></li>
+            </script>
+
+            <script id="component" type="text/x-handlebars-template">
+                <div class= "sub-sub-links">
+                    <div class="clickable {{selected}}">
+                        <a >{{displaycomponent}} </a>
+                    </div>
+                    <ul id={{project}}{{component}} class="sub-sub-sub-links">
+
+                    </ul>
+                </div>
+            </script>
+
+            <script id="project" type="text/x-handlebars-template">
+                <div id={{project}} class="sub-links">
+                    <div class="clickable {{selected}}">
+                        <a type='button'>{{project}} </a>
+                    </div>
+                </div>
+            </script>
+
+    <my-app></my-app>
+    <header class="header-basic">
+
+            <div class="header-limiter">
+                <h1>NerdLevels</h1>
+                <nav>
+                  <a href="/#">Home</a>
+                    <a class="selected">Learn</a>
+                    <a class="nogo" href="examples">Examples</a>
+                    <a class="nogo" href="blog">Blog</a>
+                    <a href="about">About</a>
+                    <!--<a class="nogo" href="faq">FAQ</a>-->
+                </nav>
+            </div>
+
+        </header>
+
+
+    <aside id="sidebar" class="sidebar-left-collapse">
+
+        <a class="company-logo"><img id="logo" src="/img/nerdlevels-logo-green.png" alt="NerdLevels"></a>
+        <div id="test" class="sidebar-links">
+        <div id="web" class="link">
+            <div id="webClick" class="clickable link-blue">
+                <a>
+                    <i class="fa fa-desktop"></i>Web Development
+                </a>
+            </div>
+
+        </div>
+        <div id="game" class="link">
+            <div id="gameClick" class="clickable link-red">
+                    <a>
+                        <i class="fa fa-gamepad"></i>Game Development
+                    </a>
+            </div>
+
+        </div>
+    </div>
+
+    </aside>
+
+
+
+    <div class="main-content">
+        <div id="videosDiv" class="videosDiv">
+
+
+        </div>
+        <div id="checklistDiv" class="checklistDiv">
+        </div>
+        <div id="scriptDiv">
+        </div>
+    </div>
+
+
+    <script src="/js/app/bundle.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script>
+
+
+
+
+     $(function () {
+            var links = $('.sidebar-links > div > .clickable ~ div > .clickable ~ div > .clickable');
+
+            links.on('click', function () {
+                if($(this).hasClass("selected")){
+                    links.removeClass('selected');
+                }else{
+                    links.removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+          });
+
+        $(function () {
+            var links = $('.sidebar-links > div > .clickable ~ div > .clickable');
+
+            links.on('click', function () {
+                if($(this).hasClass("selected")){
+                    links.removeClass('selected');
+                }else{
+                    links.removeClass('selected');
+                    $(this).addClass('selected');
+                }
+
+            });
+        });
+
+        $(function () {
+             var links = $('.sidebar-links > div > .clickable');
+
+             links.on('click', function () {
+                if($(this).hasClass("selected")){
+                    links.removeClass('selected');
+                }else{
+                    links.removeClass('selected');
+                    $(this).addClass('selected');
+                }
+
+             });
+        });
+     </script>
+
+</body>
+
+</html>
