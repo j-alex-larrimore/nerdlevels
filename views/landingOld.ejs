@@ -1,183 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+     <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>NerdLevels</title>
+          <script src="https://use.fontawesome.com/5609f9221d.js"></script>
+          <link rel="stylesheet" href="css/style.css">
+     </head>
+     <body>
+          <nav>
+               <ul class="navigation-list">
+                    <li class="navigation-list__item"><a href="/">Home</a></li>
+                    <li class="navigation-list__item"><a href="/about">About</a></li>
+                    <li class="navigation-list__item">Examples</li>
+                    <li class="navigation-list__item"><a href="/landingOld">Members</a></li>
+               </ul>
+          </nav>
 
-<head>
-    <base href="/">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+          <header class="main-header content-section">
+               <div class="content-section--flex-box">
+                    <section class="content-section__item">
+                         <h1 class="main-header__title">Log In to Begin</h1>
+                         <h4 class="main-header__subtitle">We keep track of your learning progress. To do so, log in with your preferred social media account. Don't worry, we won't send you emails or post on your wall.</h2>
+                    </section>
+                    <section class="login content-section__item">
+                         <a href="/auth/facebook"><button class="login__button login__button--facebook">Log in with Facebook</button></a>
+                         <a href="/auth/google"><button class="login__button login__button--google">Log in with Google</button></a>
+                    </section>
+               </div>
+          </header>
 
-    <title>NerdLevels</title>
-    <link rel="icon" type="image/png" href="/img/nerdlevels-logo-green.png" />
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <!--<link rel="stylesheet" href="css/demo.css">-->
-    <link href="https://fonts.googleapis.com/css?family=Audiowide|Marcellus+SC|Press+Start+2P|Quantico" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Abhaya+Libre|Bangers|Cinzel|Russo+One" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
-	<link rel="stylesheet" href="css/footer-distributed-with-contact-form.css">
-    <link href="css/landing-page.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-	<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-    <!-- Header -->
-    <a name="about"></a>
-    <div class="intro-header">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <h1>NerdLevels</h1>
-                        <h3>Level Up Your Code</h3>
-                        <hr class="intro-divider">
-
+          <footer class="footer content-section">
+               <section class="footer__section social-media">
+                    <h2 class="social-media__title">Connect With Us</h2>
+                    <div class="social-media--flex-box">
+                         <a class="social-media__icon" href="https://twitter.com/NerdLevels"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                         <a class="social-media__icon" href="https://www.facebook.com/profile.php?id=100015577668271"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                         <a class="social-media__icon" href="https://www.instagram.com/nerdlevels/"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                         <a class="social-media__icon" href="https://www.linkedin.com/in/nerdlevels-ca-3831a5137/"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
                     </div>
-                </div>
-            </div>
+               </section>
+               <section class="footer__section contact">
+                    <h2 class="contact__title">Contact Us</h2>
+                    <form class="signup-form" action="https://formspree.io/j.alex.larrimore@nerdlevels.com" method="post">
+                         <input class="signup-form__input" type="text" name="name" placeholder="Please enter your name">
+                         <input class="signup-form__input" type="email" name="_replyto" placeholder="Please enter your email address">
+                         <textarea class="signup-form__input" name="message" rows="8" placeholder="Please enter your message"></textarea>
+                         <input type="hidden" name="_subject" value="New Message from NerdLevels Visitor" />
+                         <input type="text" name="_gotcha" style="display:none" />
+                         <input class="signup-form__button" type="submit" name="submit" value="Send">
+                    </form>
+               </section>
+               <section class="footer__section copyright">
+                    <img class="copyright__logo" src="img/nerdlevels-logo.gif">
+                    <h2 class="copyright__title">NerdLevels</h2>
+                    <p class="copyright__text">Pasadena, CA</p>
+                    <p class="copyright__text">Copyright 2016 by NerdLevels</p>
+               </section>
+          </footer>
 
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.intro-header -->
-
-    <!-- Page Content -->
-
-
-	<a  name="services"></a>
-    <div class="content-section-a">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                   <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Log In To Begin</h2>
-                    <p class="lead">We keep track of your learning progress. To do so, log in with your
-                    preferred social media account. Don't worry, we won't send you emails or post on your wall.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <div class="loginButton">
-                            <a target="_parent" href="/auth/facebook">
-                                <img class="loginBtnImg" src="/img/fbLoginBtn.png" alt="Sign-In with Facebook">
-                            </a>
-
-                            <a target="_parent" href="/auth/google">
-                                <img class="loginBtnImg" src="/img/googlelogin.png" alt="Sign-In with Google">
-                            </a>
-                        </div>
-
-                </div>
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <!--<div class="content-section-b">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Web Development<br>with Javascript and Node.js</h2>
-                    <p class="lead">In our Web Development fundamentals course, you will learn how to program with HTML, CSS and Javascript. We will teach you how to use
-                    Node.js and key node modules as well as OAuth 2.0, social authentication and how to create a subscription service.</p>
-                </div>
-                <div id="webpic" class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="img/javascript.png" alt="">
-                </div>
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <div class="content-section-a">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Game Development<br>With the Unity Engine</h2>
-                    <p class="lead">Our Game Development course will teach you how to build fantastic games using the Unity engine and the C# programming language. Learn and master coding principles with designing and building your very own games including a platformer, puzzle, dungeon crawler and role playing game.
-                </div>
-                <div id="gamepic" class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="img/blackgreen.jpg" alt="">
-                </div>
-            </div>
-
-        </div>
-
-
-    </div>-->
-
-    <footer class="footer-distributed">
-
-			<div class="footer-left">
-
-				<h3>NerdLevels <img id="footer-img" class="img-responsive" src="img/nerdlevels-logo-white-gray.png"></h3>
-                <p class="footer-links">Pasadena, CA</p>
-
-
-				<p class="footer-company-name">NerdLevels &copy; 2016</p>
-
-
-			</div>
-
-			<div class="footer-right">
-
-				<p>Contact Us</p>
-
-				<form name="sentMessage" id="contactForm" novalidate>
-
-					<input type="text" id="email" name="email" placeholder="Email" />
-					<textarea id="message" name="message" placeholder="Message"></textarea>
-                    <div id="success"></div>
-					<button type="submit">Send</button>
-
-				</form>
-
-			</div>
-
-		</footer>
-
-    <script src="js/jquery.js"></script>
-
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
-
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-</body>
-
+     </body>
 </html>
