@@ -166,8 +166,12 @@
         }
         //ADDS SCRIPTS TO VIDEOS
         function playVideo(){
-            var str = '<iframe src="https://player.vimeo.com/video/<%= vidID %>" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
-            $('.videosDiv').append(str);
+          ///
+          ///
+          //FINDING FRAME ERROR
+          ///
+          //  var str = '<iframe src="https://player.vimeo.com/video/<%= vidID %>" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+          //  $('.videosDiv').append(str);
         }
         function addChecklist(){
             var str = '<img src="https://s3.amazonaws.com/nerdlevels/<%= vidTrack %>/<%= vidProject %>/<%= vidComponent %>/<%= vidName %>">';
