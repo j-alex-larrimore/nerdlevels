@@ -19,7 +19,7 @@ if(process.env.NODE_ENV === 'production'){
             clientID: process.env.fbClientID,
             clientSecret: process.env.fbClientSecret,
             callbackURL: process.env.host + "/auth/facebook/callback",
-            immediate: false,
+            immediate: true,
             profileFields: ['id', 'displayName', 'photos']
         },
         twitter: {
