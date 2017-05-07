@@ -4,7 +4,7 @@ if(process.env.NODE_ENV === 'production'){
     //Redis stuff all connected to online
     let redisURI = require('url').parse(process.env.REDIS_URL);
     let redisPassword = redisURI.auth.split(':')[1];
-
+    
     module.exports = {
         host: process.env.host || "",
         url: process.env.siteURL,
