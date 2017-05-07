@@ -1,0 +1,365 @@
+body{
+    background-color: #33383b;
+}
+/* The main content */
+
+a:hover{
+	cursor: pointer;
+}
+
+#check{
+	width: 2px;
+}
+
+.videosDiv, .checklistDiv, #scriptDiv {
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+}
+
+.checklistDiv {
+	padding-left: 200px;
+	max-width: 100%;
+}
+
+#scriptDiv{
+	font-size: 24px;
+	margin-top: 25px;
+	color: white;
+	line-height: 150%;
+	font-family: 'Dosis', sans-serif;
+}
+
+img {
+	max-width: 90%;
+}
+
+video {
+	width: 800px;
+	height: auto;
+}
+
+#videoTitle{
+	/*font-family: 'Audiowide', cursive;*/
+	font-family: 'Exo', sans-serif;
+	margin-bottom: 50px;
+}
+
+.main-content {
+	padding: 120px 0px 40px 40px;
+	margin: 0 0 0 180px;
+}
+
+.main-content h1{
+    text-align: center;
+    color: #39FF14;
+}
+/* The left-collapsing sidebar */
+
+.sidebar-left-collapse {
+    overflow: auto;
+    font-family: 'Exo', sans-serif;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #292c2f;
+	width: 250px;
+	height: 100%;
+	padding: 20px 0;
+}
+
+/*Logo */
+.sidebar-left-collapse img {
+	display: block;
+	width: 122px;
+	height: auto;
+	margin: 0 auto;
+}
+
+/* Entire Sidebar */
+.sidebar-left-collapse .sidebar-links {
+	margin: 30px auto;
+}
+
+/*Unselected Collapse Main Option/track .sidebar-links div > a */
+.sidebar-links div.clickable > a{
+	display: block;
+	text-decoration: none;
+	margin: 0 auto 5px auto;
+	padding: 10px 0 10px 5px;
+	background-color: #35393e;
+	text-align: left;
+	color:  #b3bcc5;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 1.5;
+	border-left-width: 2px;
+	border-left-style: solid;
+}
+
+/*Selected main option/track */
+.sidebar-links div.selected > a{
+	background-color: #ffffff;
+	color: #565d63;
+	line-height: 2;
+	margin: 0;
+}
+
+/*Font awesome */
+.sidebar-links div > a i.fa {
+	position: relative;
+	font-size: 20px;
+	top: 3px;
+	width: 40px;
+	text-align: center;
+}
+
+/*Unselected Options .sidebar-links div div div+ul.sub-sub-sub-links,  */
+.sibebar-links div, .sidebar-links div div.sub-links, .sidebar-links div div div.sub-sub-links, .sidebar-links div div div + ul {
+	max-height: 0;
+	overflow: hidden;
+	list-style: none;
+	padding: 0 0 0 30px;
+	color:  #b3bcc5;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 24px;
+	margin: 0;
+	transition: 0.4s;
+}
+
+/*expanded links*/
+.sidebar-links div div.selected ~ div, .sidebar-links div div.selected ~ div div.selected ~ ul{
+	max-height: 400px;
+    overflow: auto;
+	padding: 2px 0 2px 20px;
+}
+
+/* Children of selected links */
+.sidebar-links div .sub-sub-sub-links a {
+	text-decoration: none;
+	color: #b3bcc5;
+	display: block;
+	text-align: left;
+}
+
+.sidebar-links div .sub-sub-sub-links li.current div a {
+	background-color: #39FF14;
+	color: black;
+	padding-left: 2px;
+}
+
+/* Active Children of selected links */
+.sidebar-links div .sub-sub-sub-links a:active {
+	text-decoration: none;
+	color: #b3bcc5;
+	display: block;
+	text-align: left;
+}
+
+.sidebar-links div .sub-sub-sub-links a.active {
+    color: #39FF14;
+}
+
+/* Link Colors */
+
+.sidebar-links div.link-blue > a {
+	border-color: #487db2;
+}
+
+.sidebar-links div.link-blue > a i.fa {
+	color: #487db2;
+}
+
+.sidebar-links div.link-red > a {
+	border-color: #da4545;
+}
+
+.sidebar-links div.link-red > a i.fa {
+	color: #da4545;
+}
+
+.sidebar-links div.link-yellow > a {
+	border-color: #d0d237;
+}
+
+.sidebar-links div.link-yellow > a i.fa {
+	color: #d0d237;
+}
+
+.sidebar-links div.link-green > a {
+	border-color: #86be2e;
+}
+
+.sidebar-links div.link-green > a i.fa {
+	color: #86be2e;
+}
+
+/* Making the sidebar responsive */
+
+#video1 {
+		padding: 20px 20px;
+        display: block;
+        margin: 0 auto;
+	}
+
+@media (max-width: 1100px) {
+
+   #video1 {
+		position: static;
+	}
+
+	#scriptDiv, .videosDiv, video {
+		width: 600px;
+	}
+
+	#scriptDiv{
+		font-size: 20px;
+	}
+
+	.main-content{
+		max-width: none;
+		padding: 10px 20px;
+		margin: 0 0 40px;
+	}
+
+	.sidebar-left-collapse {
+		width: auto;
+		height: auto;
+		position: static;
+		padding: 2px 0 0;
+	}
+
+	.sidebar-left-collapse .sidebar-links {
+		text-align: center;
+		margin: 20px auto 0;
+	}
+
+	.sidebar-links > div {
+		display: inline-block;
+		/*width: 100px;*/
+        width: 45%;
+	}
+
+	.sidebar-links div > div.clickable {
+		text-align: center;
+		margin: 0;
+		padding: 1px 0;
+		border-left: none;
+		border-top-width: 2px;
+		border-top-style: solid;
+
+        display: block;
+		margin: 0 auto 5px;
+	}
+
+	.sidebar-links div.clickable > a {
+	   padding: 2px 5px;
+	}
+
+    .sidebar-links div > a i.fa{
+       position: inherit;
+    }
+
+    .checklistDiv {
+		padding-left: 60px;
+	}
+
+	/*.sidebar-links div ul.sub-links {
+		display: none;
+	}
+
+	.sidebar-links div.selected .sub-links {
+		display: block;
+		position: absolute;
+		text-align: center;
+		width: auto;
+		left: 0;
+		right: 0;
+	}
+
+	.sidebar-links div.selected .sub-links li {
+		display: inline-block;
+	}
+
+	.sidebar-links div.selected .sub-links a {
+		display: inline-block;
+		margin-right: 20px;
+		font-size: 13px;
+		color: #748290;
+	}*/
+
+}
+
+/* Smartphone version */
+
+@media (max-width: 450px) {
+
+	.sidebar-left-collapse {
+		padding: 20px 0;
+	}
+
+	.sidebar-left-collapse .sidebar-links {
+		text-align: center;
+		margin: 20px auto 0;
+		position: static;
+	}
+
+	.sidebar-links div {
+		display: block;
+		width: 240px;
+		margin: 0 auto 5px;
+	}
+
+	.sidebar-links div > a {
+		text-align: left;
+		padding: 1px 10px;
+		vertical-align: middle;
+		/*border-top: none;
+		border-left-width: 2px;
+		border-left-style: solid;*/
+	}
+
+	.sidebar-links div > a i.fa {
+		display: inline-block;
+		font-size: 20px;
+		width: 20px;
+		margin: 0 20px 0 0;
+	}
+
+	.sidebar-links div.selected .sub-links {
+		bottom: -90px;
+	}
+
+	.videosDiv, #scriptDiv {
+		margin-left: auto;
+		margin-right: auto;
+		width: 280px;
+	}
+
+	#scriptDiv{
+		font-size: 14px;
+	}
+
+	video {
+		width: 280px;
+		height: auto;
+	}
+
+	.videoTitle {
+		font-size: 20px;
+	}
+
+	.checklistDiv {
+		padding-left: 10px;
+	}
+
+}
+
+/*	Removing margins and paddings from the body, so that
+    the sidebar takes the full height of the page */
+
+body {
+	margin: 0;
+	padding: 0;
+}

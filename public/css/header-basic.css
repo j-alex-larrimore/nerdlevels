@@ -1,0 +1,120 @@
+.header-basic {
+    position: fixed;
+	background-color: #292c2f;
+	box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15);
+	padding: 20px 0 20px 0;
+	height: 80px;
+    width: 100%;
+	box-sizing: border-box;
+}
+
+.header-basic .header-limiter {
+	/*max-width: 1200px;*/
+	text-align: center;
+    margin: 0 0 0 250px;
+    padding: 0 20px 0 20px;
+	/*margin: 0 auto;*/
+}
+
+/* Logo */
+
+.header-basic .header-limiter h1 {
+	float: left;
+	color: #39FF14;
+    font-family: 'Audiowide', cursive;
+	line-height: 40px;
+	margin: 0;
+}
+
+.header-basic .header-limiter h1 span {
+	color: #5383d3;
+}
+
+/* The header links */
+
+.header-basic .header-limiter a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.header-basic .header-limiter nav{
+	font-family: 'Exo', sans-serif;
+	line-height: 40px;
+	float: right;
+}
+
+.header-basic .header-limiter nav a{
+	display: inline-block;
+	padding: 0 5px;
+	text-decoration:none;
+	color: #ffffff;
+	font-size: 16px;
+	opacity: 0.9;
+}
+
+.header-basic .header-limiter nav a:hover{
+	opacity: 1;
+}
+
+.header-basic .header-limiter nav a.nogo {
+	/*color: #33383b;*/
+	color: gray;
+	font-style: italic;
+	pointer-events: none;
+}
+
+.header-basic .header-limiter nav a.selected {
+	color: #39FF14;
+	pointer-events: none;
+	opacity: 1;
+}
+
+/* Making the header responsive */
+@media all and (max-width:800px) {
+	.header-basic .header-limiter nav a {
+		font-size: 13px;
+        padding: 0 2px;
+	}
+}
+
+@media all and (max-width: 600px) {
+
+	.header-basic {
+		padding: 30px 0;
+		height: 75px;
+	}
+    
+    .header-basic .header-limiter{
+        margin: 0 0 -10px 0;
+        width: 100%;
+    }
+
+	.header-basic .header-limiter h1 {
+		float: left;
+		margin: 0 0 0 0; /*-8px 0 10px;*/
+		/*text-align: center*/
+		font-size: 15px;
+		line-height: 1;
+	}
+
+	.header-basic .header-limiter nav {
+		line-height: 1;
+        float: none;
+	}
+
+	.header-basic .header-limiter nav a {
+		font-size: 10px;
+        padding: 0 2px;
+	}
+
+
+}
+
+
+
+/* For the headers to look good, be sure to reset the margin and padding of the body */
+
+body {
+	margin:0;
+	padding:0;
+}
