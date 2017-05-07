@@ -4,7 +4,7 @@ if(process.env.NODE_ENV === 'production'){
     //Redis stuff all connected to online
     let redisURI = require('url').parse(process.env.REDIS_URL);
     let redisPassword = redisURI.auth.split(':')[1];
-
+    
     module.exports = {
         host: process.env.host || "",
         url: process.env.siteURL,
@@ -19,7 +19,6 @@ if(process.env.NODE_ENV === 'production'){
             clientID: process.env.fbClientID,
             clientSecret: process.env.fbClientSecret,
             callbackURL: process.env.host + "/auth/facebook/callback",
-            immediate: false,
             profileFields: ['id', 'displayName', 'photos']
         },
         twitter: {
@@ -33,7 +32,6 @@ if(process.env.NODE_ENV === 'production'){
             clientSecret: process.env.ggClientSecret,
             callbackURL: process.env.host + "/auth/google/callback",
             profileFields: ['id', 'displayName', 'photos'],
-            immediate: false,
             scope: ['email', 'profile']
         },
         redis: {
